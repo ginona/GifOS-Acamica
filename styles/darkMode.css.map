@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,CAAA;EACL,UAAU,EAAE,kBAAkB;CACjC;;AACD,AAAA,eAAe,CAAA;EACX,UAAU,EAAE,OAAO;CACtB;;AACG,AAAA,QAAQ,CAAA;EACJ,GAAG,EAAE,KAAK;EACd,gBAAgB,EAAE,kBAAkB;CAUnC;;AAZD,AAII,QAJI,AAIH,QAAQ,CAAA;EACb,gBAAgB,EAAE,kBAAkB;CAE/B;;AAPL,AAQI,QARI,AAQH,OAAO,CAAA;EACZ,gBAAgB,EAAE,kBAAkB;CAEjC",
+    "sources": [
+        "darkMode.scss"
+    ],
+    "names": [],
+    "file": "darkMode.css"
+}

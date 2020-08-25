@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/darkMode.css">
+    <title>GifOS</title>
+</head>
+<body>
+    <header class="header">
+        <img class="logo" src="img/logo-mobile.svg" alt="">
+        <div id="headerCompleto">
+            <input class="menu-btn" type="checkbox" id="menu-btn">
+        <label class="menu-icon" id="menuIconId" for="menu-btn"><span id="nav-icon-id" class="nav-icon"></span></label>
+        <ul id="menu-ul" class="menu">
+            <li><a href="#modoNocturno" onclick="darkMode()">Modo nocturno</a></li>
+            <div class="borde"><div class="borde2"></div></div>
+            <li><a href="#favoritos">Favoritos</a></li>
+            <div class="borde"><div class="borde2"></div></div>
+            <li><a href="#misGifos">Mis GIFOS</a></li>
+            <div class="borde"><div class="borde2"></div></div>
+        </ul>
+        </div>
+    </header>
+    <main>
+        <section id="titulo">
+            <h1>Inspírate, busca, guarda, y crea los mejores <span>GIFOS</span></h1>
+        </section>
+        <section id="busqueda">
+            <div class="image-search">
+                <img src="img/ilustra_header.svg" alt="imagen-busqueda">
+            </div>
+            <div class="search-box">
+                <input class="search-txt" type="text" name="" placeholder="Busca GIFOS y más">
+                <a href="#" class="search-btn">
+                <i class="fa fa-search"></i>
+                </a>
+            </div>
+        </section>
+        <section id="trending">
+            <div class="trend-text">
+                <h2>Trending: </h2>
+                <p>
+                    Reactions, Entertainment, Sports, Stickers, Artists
+                </p>
+            </div>
+            <div class="tr-gifs"><br><br>
+                <div class="text-inside">
+                    <h2>Trending GIFOS</h2><br>
+                    <p>Mira los últimos GIFOS de nuestra comunidad.</p>
+                </div>
+
+                <br><br>
+            </div>
+        </section>
+    </main>
+    <br><br>
+    <footer>
+        <section id="redes">
+            <p>Compartir en:</p><br>
+            <div class="social-media">
+                <a href="https://www.facebook.com/Acamica.org/" class="fa fa-facebook-f" target="_blank"></a>
+                <a href="https://twitter.com/Acamica_com" class="fa fa-twitter" target="_blank"></a>
+                <a href="https://www.instagram.com/acamica/?hl=es-la" class="fa fa-instagram" target="_blank"></a>
+            </div>
+            <br><br>
+            <p>© GIFOS 2020 All Rights Reserved.</p><br>
+        </section>
+    </footer>
+    <script src="js/darkMode.js"></script>
+</body>
+</html>
