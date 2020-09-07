@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" color-mode="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/darkMode.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/style.css">
-    <!-- <link rel="stylesheet" href="styles/darkMode.css"> -->
-    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/favsStyle.css">
     <title>GifOS</title>
 </head>
 <body>
@@ -20,21 +18,19 @@
             <input class="menu-btn" type="checkbox" id="menu-btn">
         <label class="menu-icon" id="menuIconId" for="menu-btn"><span id="nav-icon-id" class="nav-icon"></span></label>
         <ul id="menu-ul" class="menu">
-            <li><a class="change-btn hideL">Modo Diurno</a><div class="borde hideL"><div class="borde2"></div></div></li>
-            <li><a class="change-btn hideD">Modo nocturno</a> 
+            <li><a class="change-btn hideL">Modo Diurno</a></li>
+            <div class="borde hideL"><div class="borde2"></div></div>
+            <li><a class="change-btn hideD">Modo nocturno</a></li>
             <div class="borde hideD"><div class="borde2"></div></div>
-            </li>
-            <li><a href="./favoritos.html">Favoritos</a>
+            <li><a href="#favoritos">Favoritos</a></li>
             <div class="borde"><div class="borde2"></div></div>
-            </li>
-            <li><a href="#misGifos">Mis GIFOS</a>
+            <li><a href="#misGifos">Mis GIFOS</a></li>
             <div class="borde"><div class="borde2"></div></div>
-            </li>
         </ul>
         </div>
     </header>
     <main>
-        <section id="titulo">
+        <!-- <section id="titulo">
             <h1>Inspírate, busca, guarda, y crea los mejores <span>GIFOS</span></h1>
         </section>
         <section id="busqueda">
@@ -42,13 +38,22 @@
                 <img src="img/ilustra_header.svg" alt="imagen-busqueda">
             </div>
             <div class="search-box">
-                <!-- <div class="search-bar"> -->
-                    <input class="search-txt" type="text" name="search-txt" placeholder="Busca GIFOS y más">
+                <input class="search-txt" type="text" name="" placeholder="Busca GIFOS y más">
                 <a href="#" class="search-btn">
                 <i class="fa fa-search"></i>
                 </a>
-                <!-- </div> -->
             </div>
+        </section> -->
+        <section id="favoritos">
+            <div class="image">
+                <img src="img/icon-favoritos.svg" alt="fav-logo">
+            </div>
+            <div class="titulo"><h1>Favoritos</h1></div>
+            <div class="gifFav">
+                
+            </div>
+
+
         </section>
         <section id="trending">
             <div class="trend-text">
@@ -62,18 +67,8 @@
                     <h2>Trending GIFOS</h2><br>
                     <p>Mira los últimos GIFOS de nuestra comunidad.</p>
                 </div>
-                <div class="carousel">
-                    <button class="slick-arrow slick-prev" id="button-prev">
-                      <i class="fa fa-chevron-left svg-arrow"></i>
-                    </button>
-                    <div class="slick-list" id="slick-list">
-                      <div class="slick-track" id="track">
-                      </div>
-                    </div>
-                    <button class="slick-arrow slick-next" id="button-next">
-                      <i class="fa fa-chevron-right"></i>
-                    </button>
-                </div>
+
+                <br><br>
             </div>
         </section>
     </main>
@@ -91,6 +86,5 @@
         </section>
     </footer>
     <script src="js/darkMode.js"></script>
-    <script src="js/trendingCards.js"></script>
 </body>
 </html>

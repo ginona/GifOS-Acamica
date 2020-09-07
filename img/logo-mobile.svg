@@ -16,7 +16,7 @@
                             <use xlink:href="#path-1"></use>
                         </mask>
                         <g id="Clip-3"></g>
-                        <text id="GIFOS" mask="url(#mask-2)" font-family="'Roboto', sans-serif" font-size="16" font-weight="700" fill="#572EE5">
+                        <text id="GIFOS" mask="url(#mask-2)" font-family="Roboto-Black, Roboto" font-size="16" font-weight="700" fill="#572EE5">
                             <tspan x="1" y="20">GIFOS</tspan>
                         </text>
                     </g>

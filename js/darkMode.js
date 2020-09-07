@@ -1,8 +1,15 @@
+document.documentElement.setAttribute('color-mode','light');
 function darkMode(){
-    let lista = document.getElementById("headerCompleto");
-    let ulCompleto = document.getElementById("menu-ul");
-    let cruzLineas = document.getElementById("nav-icon-id");
-    lista.classList.toggle("headerCompleto");
-    ulCompleto.classList.toggle("darkMode");
-    cruzLineas.classList.toggle("navIcon");
-}
+    const changeColorMode = e =>{
+        if(e.currentTarget.classList.contains("hideL")){
+            document.documentElement.setAttribute("color-mode", "light");
+            return;
+        }
+            document.documentElement.setAttribute("color-mode", "dark");
+    };
+    const changeColorBtn = document.querySelectorAll(".change-btn");
+
+    changeColorBtn.forEach( btn => { btn.addEventListener("click", changeColorMode) })
+};
+
+darkMode();

@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+:root[color-mode="light"] {
+  --gifos-header: #ffffff;
+  --gifos-principal-font: #572EE5;
+  --gifos-green: #50E3C2;
+  --gifos-trends-sub: #000000;
+  --border-search: #572EE5;
+  --gifos-ulback: rgba(87,46,229,0.90);
+  --gifos-networks: #CDD6E0;
+  --gifos-trending-back: #F3F5F8;
+  --gifos-background: #ffffff;
+  --gifos-span: #50E3C2;
+}
+
+:root[color-mode="dark"] {
+  --gifos-principal-font: #ffffff;
+  --gifos-background: #37383C;
+  --gifos-ulback: #000000;
+  --gifos-header: #ffffff;
+  --gifos-trends-sub: #ffffff;
+  --gifos-trending-back: #222326;
+  --gifos-networks: #CDD6E0;
+  --gifos-span: #50E3C2;
+}
+
+.image {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.titulo h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: var(--gifos-principal-font);
+  text-align: center;
+  line-height: 30px;
+  font-weight: 700;
+}
+/*# sourceMappingURL=favsStyle.css.map */
