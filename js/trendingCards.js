@@ -29,9 +29,6 @@ function Move(value){
     }
 }
 
-
-const searchForm = document.getElementById('search-form')
-const inputText = document.getElementById('inputText')
 const resultsEl = document.getElementById('track')
 
 function search(data){
@@ -57,19 +54,35 @@ function search(data){
      resultsEl.innerHTML = resultHTML
 }
 
-   function addToLocalStorage(name,value) {
+
+async function getGif(){
+    const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
+    const API = 'https://api.giphy.com/v1/gifs/trending'; 
+
+    const apiURL = API+'?api_key='+API_KEY+'&limit=12&rating=g';
+
+    const response = await fetch(apiURL);
+    const data = await response.json();
+    search(data);
+    trtrending(data);
+}
+
+getGif()
+
+
+   function addToLS(name,value) {
     let existing = localStorage.getItem(name);
     existing = existing ? JSON.parse(existing) : [];
     existing.push(value);
     localStorage.setItem(name,JSON.stringify(existing)); 
 }
 
-function addtoFavourites(gif) {
+function addFavourites(gif) {
     document.getElementById(`${gif.id}-add`).classList.add('icon-heart--active')
-    addToLocalStorage('Favourites',gif)
+    addToLS('Favourites',gif)
 }
 
-async function donwloadFavourites(gif){
+async function downloadFavourites(gif){
     let a = document.createElement('a');
     let response = await fetch(`${gif.images.downsized_still.url}`);
     let file = await response.blob();
@@ -91,10 +104,10 @@ function events(gif){
             removeFavourites(gif);
         }
         if (e.currentTarget.id == `${gif.id}-add`){
-            addtoFavourites(gif);
+            addFavourites(gif);
         }
         if (e.currentTarget.id == `${gif.id}-download`){
-            donwloadFavourites(gif);
+            downloadFavourites(gif);
         }
     };
     const handlerEventsForEacrhIcon = document.querySelectorAll(".icons");
@@ -108,17 +121,3 @@ function trtrending(data){
         return card;
     }).join('');
 }
-
-async function getGif(){
-    const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
-    const API = 'https://api.giphy.com/v1/gifs/trending'; 
-
-    const apiURL = API+'?api_key='+API_KEY+'&limit=12&rating=g';
-
-    const response = await fetch(apiURL);
-    const data = await response.json();
-    search(data);
-    trtrending(data);
-}
-
-getGif()

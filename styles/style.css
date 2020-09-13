@@ -225,7 +225,24 @@ main #busqueda .search-box {
   height: fit-content;
   border: 1px solid var(--gifos-principal-font);
   border-radius: 40px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 10px;
+  width: 100%;
+}
+
+main #busqueda .search-box div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 main #busqueda .search-btn {
@@ -290,6 +307,49 @@ main #trending .tr-gifs .text-inside p {
   line-height: 23px;
   font-weight: 400;
   color: var(--gifos-trends-sub);
+}
+
+.suggestions {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--gifos-search);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.suggestions > div {
+  padding: 10px;
+  color: var(--gifos-search);
+  cursor: pointer;
+}
+
+.search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.search-resultados {
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  max-width: 85%;
+  grid-gap: 30px;
+  grid-row-gap: 35px;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
 }
 
 footer #redes {

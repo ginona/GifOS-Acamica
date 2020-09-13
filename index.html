@@ -44,12 +44,22 @@
             </div>
                 <div class="search-bar">
             <div class="search-box">
-                    <input class="search-txt" type="text" name="search-txt" placeholder="Busca GIFOS y más">
-                <a href="#" class="search-btn">
-                <i class="fa fa-search"></i>
-                </a>
+                    <div>
+                        <input id="search-txt" class="search-txt" type="text" name="search-txt" placeholder="Busca GIFOS y más">
+                        <a href="#" class="search-btn" id="search-btn">
+                        <i class="fa fa-search"></i>
+                        </a>
+                    </div>
+                    
+                <div class="suggestions"></div>
             </div>
                 </div>
+
+        </section>
+        <section id="results">
+            <div class="container-results">
+                <ul id="search-resultados" class="search-resultados"></ul>
+            </div>
         </section>
         <section id="trending">
             <div class="trend-text">
@@ -92,6 +102,8 @@
         </section>
     </footer>
     <script src="js/darkMode.js"></script>
+    <script src="js/searchGifs.js"></script>
     <script src="js/trendingCards.js"></script>
+    <script src="js/suggestionSearch.js"></script>
 </body>
 </html>
