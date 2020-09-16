@@ -1,25 +1,76 @@
-const countries = [
-    {name: 'USA'},
-    {name: 'India'},
-    {name: 'Argentina'},
-    {name: 'Armenia'}
-  ];
-  
   const searchInput = document.querySelector('.search-txt');
-  const suggestionsPanel = document.querySelector('.suggestions');
+  const suggestionsPanel = document.getElementById('suggestions');
   
-  searchInput.addEventListener('keyup', function() {
-    const input = searchInput.value;
-    suggestionsPanel.innerHTML = '';
-    const suggestions = countries.filter(function(country) {
-      return country.name.toLowerCase().startsWith(input);
-    });
-    suggestions.forEach(function(suggested) {
-      const div = document.createElement('div');
-      div.innerHTML = suggested.name;
-      suggestionsPanel.appendChild(div);
-    });
-    if (input === '') {
-      suggestionsPanel.innerHTML = '';  
-    }
+function fnAutoComplete(){
+  searchInput.addEventListener('keyup', async (event) =>{
+      let sug = await getAutoComplete(searchInput.value);
+      const view = `
+        <ul class="suggestions">
+            ${sug.data.map(item => `
+                <li class="option-list"><i class="fa fa-search"></i>${item.name}</li>
+            `).join('')}
+        </ul>
+        `;
+        if(sug.data.length !== 0){
+          suggestionsPanel.innerHTML = view
+        }else{
+          suggestionsPanel.innerHTML = ''
+        }
+
+        const optionList = document.querySelectorAll(".option-list");
+        optionList.forEach( li => li.addEventListener("click",searchGifoSuggested))
   })
+}
+fnAutoComplete()
+
+ async function getAutoComplete(text){
+    const url = 'https://api.giphy.com/v1/gifs/search/tags?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text;
+    try{
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }catch(error){
+      console.log('Error', error);
+    }
+  }
+
+  const searchGifoSuggested = (e) => {
+    let searchTitle = e.currentTarget.textContent
+    let inputSearch = document.getElementById('search-txt');
+    inputSearch.value = e.currentTarget.textContent;
+    let list = document.getElementById('suggestions');
+    list.innerHTML = '';
+    generateViewResults(searchTitle);
+}
+
+async function generateViewResults (textSearch) {
+  let searchResults = await getGif1(textSearch);
+  let giftSection = document.getElementById('trend-text');
+  const divResultado = document.getElementById('search-resultados');
+  const viewGifs = `
+      <div class="center">
+      <h1 class="main-title">${textSearch}</h1>
+      </div>
+      <div id="gifs-container" class="gifs-container gifs-container-search-results">           
+      </div>
+      <div id="more-results" class="button">
+          Ver más
+      </div> 
+  `;
+  const viewNoResults = `
+      <div class="center">
+      <h1 class="main-title">${textSearch}</h1>
+      </div>
+      <div class="gif-no-results">
+          <img src="./img/icon-busqueda-sin-resultado.svg" alt="No-results">
+          <p>Intenta con otra búsqueda</p>
+      </div>
+  `;
+  if( searchResults.data.length !== 0 ){
+      giftSection.innerHTML = viewGifs
+      search1(textSearch)
+  } else {
+      giftSection.innerHTML = viewNoResults
+  }
+  
+}

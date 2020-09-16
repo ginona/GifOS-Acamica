@@ -1,5 +1,6 @@
 const inputText = document.getElementById('search-txt')
-const divResult = document.getElementById('search-resultados');
+// const divResult = document.getElementById('search-resultados');
+
 
 async function getGif1(text){
     const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
@@ -16,12 +17,13 @@ inputText.addEventListener('keyup', function(e){
     if(e.key === 'Enter'){
         // e.preventDefault();
         const q = inputText.value;
-        search1(q);
-        
+        // search1(q);
+        generateViewResults(q);
     }
  })
 
 async function search1(text){
+    const divResult = document.getElementById('gifs-container');
     let searchResults = await getGif1(text);
     let resultHTML1 = '';
     searchResults.data.forEach(obj => {

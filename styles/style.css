@@ -312,19 +312,21 @@ main #trending .tr-gifs .text-inside p {
 .suggestions {
   font-family: 'Montserrat', sans-serif;
   color: var(--gifos-search);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  margin: 0px 5px 5px;
 }
 
-.suggestions > div {
-  padding: 10px;
-  color: var(--gifos-search);
+.suggestions:nth-child(1) {
+  border-top: 1px solid rgba(156, 175, 195, 0.5);
+}
+
+.suggestions > li {
+  padding: 5px 0px;
+  text-align: left;
   cursor: pointer;
+}
+
+.suggestions > li > i {
+  margin-right: 10px;
 }
 
 .search-bar {
@@ -340,7 +342,7 @@ main #trending .tr-gifs .text-inside p {
           justify-content: center;
 }
 
-.search-resultados {
+.gifs-container {
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
   max-width: 85%;
