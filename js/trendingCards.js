@@ -54,7 +54,6 @@ function search(data){
      resultsEl.innerHTML = resultHTML
 }
 
-
 async function getGif(){
     const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
     const API = 'https://api.giphy.com/v1/gifs/trending'; 
@@ -84,13 +83,14 @@ function addFavourites(gif) {
 
 async function downloadFavourites(gif){
     let a = document.createElement('a');
-    let response = await fetch(`${gif.images.downsized_still.url}`);
+    let response = await fetch(`${gif.images.downsized_small.url}`);
     let file = await response.blob();
     a.download = `${gif.title}`;
     a.href = window.URL.createObjectURL(file);
     a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
     a.click();
 }
+
 function removeFavourites(gif) {
     let data = JSON.parse(localStorage.getItem('Favorites'))
     data.forEach((ítem,index) => ítem.id === gif.id ? data.splice(index,1): null)

@@ -309,14 +309,58 @@ main #trending .tr-gifs .text-inside p {
   color: var(--gifos-trends-sub);
 }
 
+.search-box-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid var(--gifos-principal-font);
+  border-radius: 40px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px;
+  width: 100%;
+}
+
+.search-box-header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.search-btn {
+  color: var(--gifos-principal-font);
+  border-radius: 50%;
+  background: none;
+}
+
+.search-txt-header {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  color: var(--gifos-search);
+  font-size: 16px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
 .suggestions {
   font-family: 'Montserrat', sans-serif;
   color: var(--gifos-search);
   margin: 0px 5px 5px;
-}
-
-.suggestions:nth-child(1) {
-  border-top: 1px solid rgba(156, 175, 195, 0.5);
 }
 
 .suggestions > li {
@@ -340,6 +384,10 @@ main #trending .tr-gifs .text-inside p {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.hideSearch {
+  display: none;
 }
 
 .gifs-container {
@@ -374,7 +422,13 @@ footer #redes .social-media a:hover {
 
 @media (min-width: 720px) {
   .header {
-    padding-left: 5%;
+    padding: 0 5%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
   .header ul {
     all: unset;
@@ -383,7 +437,6 @@ footer #redes .social-media a:hover {
     list-style: none;
     overflow: hidden;
     background: var(--gifos-ulback);
-    padding-right: 5%;
     max-height: none;
   }
   .header ul li {
@@ -478,6 +531,9 @@ footer #redes .social-media a:hover {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+  .hideSearch {
+    margin-top: 10%;
   }
 }
 /*# sourceMappingURL=style.css.map */

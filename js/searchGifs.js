@@ -1,13 +1,14 @@
 const inputText = document.getElementById('search-txt')
+const inputTextHeader = document.getElementById('search-txt-header')
 // const divResult = document.getElementById('search-resultados');
 
 
-async function getGif1(text){
+async function getGif1(text, pag){
     const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
     const API = 'https://api.giphy.com/v1/gifs/search'; 
 
     //const apiURL = API+'?api_key='+API_KEY+'&q=cat'+'&limit=20&rating=g&lang=en';
-    const apiURL = 'https://api.giphy.com/v1/gifs/search?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text+'&limit=12&offset=0&rating=g&lang=en';
+    const apiURL = 'https://api.giphy.com/v1/gifs/search?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text+'&limit=12&offset='+pag+'&rating=g&lang=en';
     const response = await fetch(apiURL);
     const data = await response.json();
     return data
@@ -15,16 +16,21 @@ async function getGif1(text){
 
 inputText.addEventListener('keyup', function(e){ 
     if(e.key === 'Enter'){
-        // e.preventDefault();
         const q = inputText.value;
-        // search1(q);
         generateViewResults(q);
     }
  })
 
-async function search1(text){
+ inputTextHeader.addEventListener('keyup', function(e){ 
+    if(e.key === 'Enter'){
+        const q = inputTextHeader.value;
+        generateViewResults(q);
+    }
+ })
+
+async function search1(text, pag){
     const divResult = document.getElementById('gifs-container');
-    let searchResults = await getGif1(text);
+    let searchResults = await getGif1(text, pag);
     let resultHTML1 = '';
     searchResults.data.forEach(obj => {
          const url = obj.images.fixed_width.url
@@ -43,12 +49,28 @@ async function search1(text){
      </div>`;
      })
 
-     divResult.innerHTML = resultHTML1
+         divResult.insertAdjacentHTML('beforeend', resultHTML1)
+
+
     trtrending2(searchResults);
 
 }
 
-// search()
+
+async function searchById(gifId){
+    const api_url = 'https://api.giphy.com/v1/gifs/'+gifId+'?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs';
+
+    const response = await fetch(api_url);
+    const data = await response.json();
+    return data
+
+}
+
+async function searchByIdAndLoad(gifId){
+    let gifWithId = await searchById(gifId);
+    //agregar variable en trendingcards para indicar el tipo y que vaya por ella y reciclar
+}
+
 
 function addToLS2(name,value) {
     let existing = localStorage.getItem(name);
@@ -101,3 +123,16 @@ function trtrending2(data){
         return card;
     }).join('');
 }
+
+
+function showSearch(){
+    let input = window.matchMedia("(min-width: 800px)");
+    var y = window.scrollY;
+    if(input.matches && y!== 0){
+        document.getElementById("hideSearch").style.display="block";
+    }else{
+        document.getElementById("hideSearch").style.display="none";
+    }
+
+}
+window.addEventListener("scroll", showSearch);

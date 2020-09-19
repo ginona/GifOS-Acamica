@@ -4,6 +4,7 @@
 function fnAutoComplete(){
   searchInput.addEventListener('keyup', async (event) =>{
       let sug = await getAutoComplete(searchInput.value);
+      suggestionsPanel.style.borderTop = "1px solid rgba(156, 175, 195 ,.5)";
       const view = `
         <ul class="suggestions">
             ${sug.data.map(item => `
@@ -15,6 +16,7 @@ function fnAutoComplete(){
           suggestionsPanel.innerHTML = view
         }else{
           suggestionsPanel.innerHTML = ''
+          suggestionsPanel.style.borderTop = "none";
         }
 
         const optionList = document.querySelectorAll(".option-list");
@@ -43,6 +45,14 @@ fnAutoComplete()
     generateViewResults(searchTitle);
 }
 
+let pag = 12 ;
+async function searchMoreResults(textSearch) {
+    pag = pag + 12;
+    let gifsContainer = document.getElementById('gifs-container');
+    search1(textSearch, pag)
+}
+
+
 async function generateViewResults (textSearch) {
   let searchResults = await getGif1(textSearch);
   let giftSection = document.getElementById('trend-text');
@@ -68,7 +78,11 @@ async function generateViewResults (textSearch) {
   `;
   if( searchResults.data.length !== 0 ){
       giftSection.innerHTML = viewGifs
-      search1(textSearch)
+      search1(textSearch, 0)
+      let moreResults = document.getElementById('more-results')
+      moreResults.addEventListener("click", function(){
+          searchMoreResults(textSearch);
+      })
   } else {
       giftSection.innerHTML = viewNoResults
   }
