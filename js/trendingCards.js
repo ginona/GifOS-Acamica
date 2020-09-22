@@ -1,3 +1,5 @@
+// import MaxGif from '../js/maxGif.js'
+
 const buttonPrev = document.getElementById('button-prev');
 const buttonNext = document.getElementById('button-next');
 const track = document.getElementById('track');
@@ -35,8 +37,7 @@ function search(data){
     let resultHTML = '';
     data.data.forEach(obj => {
          const url = obj.images.fixed_width.url
-         const width = obj.images.fixed_width.width
-         const height = obj.images.fixed_width.height
+
 
          resultHTML += `<div class="slick">
                             <img src="${url}" alt="${obj.title}">
@@ -46,6 +47,10 @@ function search(data){
                                 <div id="${obj.id}-add" class="icons icon-heart"></div>
                                 <div id="${obj.id}-download" class="icons icon-download"></div>
                                 <div id="${obj.id}-max" class="icons icon-max"></div>
+                            </div>
+                            <div class="text-card">
+                                <div class="text-card-user">${obj.username !== '' ? obj.username : 'User' }</div>
+                                <h3 class="text-card-title">${obj.title}</h3>
                             </div>
                             </div>
                         </div>`;
@@ -83,7 +88,7 @@ function addFavourites(gif) {
 
 async function downloadFavourites(gif){
     let a = document.createElement('a');
-    let response = await fetch(`${gif.images.downsized_small.url}`);
+    let response = await fetch(`${gif.images.downsized.url}`);
     let file = await response.blob();
     a.download = `${gif.title}`;
     a.href = window.URL.createObjectURL(file);
@@ -108,6 +113,9 @@ function events(gif){
         }
         if (e.currentTarget.id == `${gif.id}-download`){
             downloadFavourites(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-max`){
+            searchById(gif.id);
         }
     };
     const handlerEventsForEacrhIcon = document.querySelectorAll(".icons");

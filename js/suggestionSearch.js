@@ -58,22 +58,20 @@ async function generateViewResults (textSearch) {
   let giftSection = document.getElementById('trend-text');
   const divResultado = document.getElementById('search-resultados');
   const viewGifs = `
-      <div class="center">
       <h1 class="main-title">${textSearch}</h1>
-      </div>
       <div id="gifs-container" class="gifs-container gifs-container-search-results">           
-      </div>
-      <div id="more-results" class="button">
+      </div><br>
+      <div id="more-results" class="button-suggestion">
           Ver más
       </div> 
   `;
   const viewNoResults = `
-      <div class="center">
+      <div class="center-no-result">
       <h1 class="main-title">${textSearch}</h1>
-      </div>
-      <div class="gif-no-results">
-          <img src="./img/icon-busqueda-sin-resultado.svg" alt="No-results">
-          <p>Intenta con otra búsqueda</p>
+      </div><br>
+      <div class="error-results">
+          <img src="./img/icon-busqueda-sin-resultado.svg" alt="Busqueda-sin-resultados"><br><br>
+          <p>Intenta con otra búsqueda.</p><br>
       </div>
   `;
   if( searchResults.data.length !== 0 ){

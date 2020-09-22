@@ -47,6 +47,7 @@ body {
 }
 
 .header {
+  border-top: 5px solid var(--gifos-principal-font);
   font-family: 'Roboto', sans-serif;
   background-color: var(--gifos-background);
   -webkit-box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
@@ -268,6 +269,7 @@ main #trending {
 
 main #trending .trend-text {
   padding: 20px 10%;
+  font-family: 'Montserrat', sans-serif;
 }
 
 main #trending .trend-text h2 {
@@ -391,8 +393,8 @@ main #trending .tr-gifs .text-inside p {
 }
 
 .gifs-container {
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
   max-width: 85%;
   grid-gap: 30px;
   grid-row-gap: 35px;
@@ -400,6 +402,10 @@ main #trending .tr-gifs .text-inside p {
   display: -ms-grid;
   display: grid;
   width: 100%;
+}
+
+footer {
+  border-bottom: 5px solid var(--gifos-principal-font);
 }
 
 footer #redes {
@@ -447,7 +453,7 @@ footer #redes .social-media a:hover {
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     text-transform: uppercase;
-    color: #572EE5;
+    color: var(--gifos-principal-font);
     font-weight: 900;
     letter-spacing: 0;
     text-align: center;
@@ -457,7 +463,6 @@ footer #redes .social-media a:hover {
   }
   .header ul li a:active {
     color: rgba(6, 10, 36, 0.56);
-    text-decoration: line-through;
   }
   .header ul li a.load-gif {
     display: block;
@@ -471,10 +476,13 @@ footer #redes .social-media a:hover {
   }
   .header ul li a.load-gif:hover {
     background-color: var(--gifos-principal-font);
-    color: var(--gifos-header);
+    color: var(--gifos-background);
+  }
+  .header ul li .borde {
+    display: none;
   }
   .header .menu {
-    background-color: #ffffff;
+    background-color: var(--gifos-background);
     clear: none;
     float: right;
     max-height: none;
@@ -519,6 +527,10 @@ footer #redes .social-media a:hover {
     margin-left: 5%;
     -webkit-transition: 0.4s;
     transition: 0.4s;
+  }
+  .gifs-container {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
   }
   .search-bar {
     display: -webkit-box;

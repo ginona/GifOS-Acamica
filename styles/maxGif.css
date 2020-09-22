@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  z-index: 5000;
+  left: 0;
+  top: 0;
+  display: none;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.max-image-text {
+  max-width: 90%;
+}
+
+.max-image-text .image-max img {
+  width: 100%;
+}
+
+.icon-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.icon-text .max-text {
+  width: 70%;
+  word-wrap: break-word;
+}
+
+.icon-text .iconos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.cross {
+  position: absolute;
+  right: 0;
+  margin: 5% 3%;
+  cursor: pointer;
+  z-index: 6000;
+}
+
+@media (min-width: 768px) {
+  .max-image-text {
+    max-width: 400px;
+  }
+  .cross {
+    margin: 5% 25% 0 0;
+  }
+}
+/*# sourceMappingURL=maxGif.css.map */

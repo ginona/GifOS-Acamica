@@ -1,0 +1,63 @@
+:root[color-mode="light"] {
+  --gifos-header: #ffffff;
+  --gifos-principal-font: #572EE5;
+  --gifos-green: #50E3C2;
+  --gifos-trends-sub: #000000;
+  --border-search: #572EE5;
+  --gifos-ulback: rgba(87,46,229,0.90);
+  --gifos-networks: #CDD6E0;
+  --gifos-trending-back: #F3F5F8;
+  --gifos-background: #ffffff;
+  --gifos-span: #50E3C2;
+  --gifos-search: #808080;
+}
+
+:root[color-mode="dark"] {
+  --gifos-principal-font: #ffffff;
+  --gifos-background: #37383C;
+  --gifos-ulback: #000000;
+  --gifos-header: #ffffff;
+  --gifos-trends-sub: #ffffff;
+  --gifos-trending-back: #222326;
+  --gifos-networks: #CDD6E0;
+  --gifos-span: #50E3C2;
+}
+
+.main-title {
+  text-align: center;
+  color: var(--gifos-principal-font);
+  margin-bottom: 2%;
+}
+
+.button-suggestion {
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 10px 30px;
+  border: 1px solid var(--gifos-principal-font);
+  border-radius: 70px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 13px;
+  color: var(--gifos-principal-font);
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  width: 130px;
+}
+
+.button-suggestion:hover {
+  background-color: var(--gifos-principal-font);
+  color: var(--gifos-background);
+}
+
+#trending .trend-text .error-results {
+  text-align: center;
+}
+
+#trending .trend-text .error-results p {
+  font-size: 22px;
+  color: #50E3C2;
+  line-height: 25px;
+  font-weight: 700;
+}
+/*# sourceMappingURL=suggestionText.css.map */

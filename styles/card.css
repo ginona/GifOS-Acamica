@@ -209,6 +209,23 @@
   width: fit-content;
 }
 
+.text-card {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  color: white;
+  left: 15px;
+  bottom: 15px;
+}
+
 @media screen and (min-width: 768px) {
   .slick-list {
     overflow: hidden;

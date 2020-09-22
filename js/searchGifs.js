@@ -45,6 +45,10 @@ async function search1(text, pag){
              <div id="${obj.id}-download" class="icons icon-download"></div>
              <div id="${obj.id}-max" class="icons icon-max"></div>
          </div>
+         <div class="text-card">
+            <div class="text-card-user">${obj.username !== '' ? obj.username : 'User' }</div>
+             <h3 class="text-card-title">${obj.title}</h3>
+        </div>
          </div>
      </div>`;
      })
@@ -55,22 +59,6 @@ async function search1(text, pag){
     trtrending2(searchResults);
 
 }
-
-
-async function searchById(gifId){
-    const api_url = 'https://api.giphy.com/v1/gifs/'+gifId+'?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs';
-
-    const response = await fetch(api_url);
-    const data = await response.json();
-    return data
-
-}
-
-async function searchByIdAndLoad(gifId){
-    let gifWithId = await searchById(gifId);
-    //agregar variable en trendingcards para indicar el tipo y que vaya por ella y reciclar
-}
-
 
 function addToLS2(name,value) {
     let existing = localStorage.getItem(name);
@@ -86,7 +74,7 @@ function addFavourites2(gif) {
 
 async function downloadFavourites2(gif){
     let a = document.createElement('a');
-    let response = await fetch(`${gif.images.downsized_still.url}`);
+    let response = await fetch(`${gif.images.downsized.url}`);
     let file = await response.blob();
     a.download = `${gif.title}`;
     a.href = window.URL.createObjectURL(file);
@@ -111,6 +99,9 @@ function events2(gif){
         if (e.currentTarget.id == `${gif.id}-download`){
             downloadFavourites2(gif);
         }
+        if (e.currentTarget.id == `${gif.id}-max`){
+            searchById(gif.id);
+        }
     };
     const handlerEventsForEacrhIcon = document.querySelectorAll(".icons");
     handlerEventsForEacrhIcon.forEach( btn => {
@@ -127,12 +118,11 @@ function trtrending2(data){
 
 function showSearch(){
     let input = window.matchMedia("(min-width: 800px)");
-    var y = window.scrollY;
+    let y = window.scrollY;
     if(input.matches && y!== 0){
         document.getElementById("hideSearch").style.display="block";
     }else{
         document.getElementById("hideSearch").style.display="none";
     }
-
 }
 window.addEventListener("scroll", showSearch);

@@ -44,6 +44,7 @@ body{
 }
 
 .header{
+    border-top: 5px solid var(--gifos-principal-font);
     font-family: 'Roboto', sans-serif;
     background-color: var(--gifos-background);
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
@@ -216,6 +217,7 @@ main{
 
         .trend-text{
             padding: 20px 10%;
+            font-family: 'Montserrat', sans-serif;
             h2{
                 text-align: center;
                 color: var(--gifos-principal-font);
@@ -253,21 +255,6 @@ main{
     }
 
 }//closeMain
-// .suggestions {
-//     font-family: 'Montserrat', sans-serif;
-//     // border-top: 1px solid #999;
-//     color: var(--gifos-search);
-//     display: flex;
-//     flex-direction: column;
-//   }
-  
-//   .suggestions > div {
-//     padding: 10px;
-//     // font-size: 20px;
-//     color: var(--gifos-search);
-//     // border-top: 1px solid #666;
-//     cursor: pointer;
-//   }
 
 .search-box-header{
     display: flex;
@@ -326,7 +313,7 @@ main{
 }
 
 .gifs-container{
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     max-width: 85%;
     grid-gap: 30px;
     grid-row-gap: 35px;
@@ -336,6 +323,7 @@ main{
 }
 
 footer{
+    border-bottom: 5px solid var(--gifos-principal-font);
     #redes{
         font-family: 'Roboto', sans-serif;
         text-align: center;
@@ -375,7 +363,7 @@ footer{
                     font-family: 'Montserrat', sans-serif;
                     font-size: 13px;
                     text-transform: uppercase;
-                    color: #572EE5;
+                    color: var(--gifos-principal-font);
                     font-weight: 900;
                     letter-spacing: 0;
                     text-align: center;
@@ -386,7 +374,6 @@ footer{
                     }
                     &:active{
                         color: rgba(6,10,36,0.56);
-                        text-decoration: line-through;
                     }
                 }
                 a.load-gif{
@@ -400,13 +387,16 @@ footer{
                     font-weight: 400;
                     &:hover{
                         background-color: var(--gifos-principal-font);
-                        color: var(--gifos-header);
+                        color: var(--gifos-background);
                     }
+                }
+                .borde{
+                    display: none;
                 }
         }
         }
         .menu{
-            background-color: #ffffff;
+            background-color: var(--gifos-background);
             clear: none;
             float: right;
             max-height: none;
@@ -450,6 +440,9 @@ footer{
                 transition: 0.4s;
             }
         }
+    }
+    .gifs-container{
+        grid-template-columns: repeat(4, 1fr);
     }
     
     .search-bar{
