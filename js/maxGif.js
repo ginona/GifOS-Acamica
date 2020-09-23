@@ -1,14 +1,9 @@
 var modal = document.getElementById("modal")
 
-// var crossBtn = document.getElementById("cierreModal")
-
-// crossBtn.addEventListener('click', closeModal)
-
 
 function closeModal(){
     modal.style.display = 'none';
 }
-
 
 async function searchById(gifId){
     const api_url = 'https://api.giphy.com/v1/gifs/'+gifId+'?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs';

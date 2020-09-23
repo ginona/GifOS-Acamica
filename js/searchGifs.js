@@ -40,7 +40,7 @@ async function searchGifsFn(text, pag){
          const url = obj.images.fixed_width.url
          const width = obj.images.fixed_width.width
          const height = obj.images.fixed_width.height
-         resultHTML1 += `<div class="slick-search">
+         resultHTML1 += `<div class="slick-search" id="${obj.id}">
          <img src="${url}" alt="${obj.title}">
          <div class="card">
          <div class="group-icons">

@@ -54,7 +54,7 @@ function showGif(data){
          const url = obj.images.fixed_width.url
 
 
-         resultHTML += `<div class="slick">
+         resultHTML += `<div class="slick" id="${obj.id}">
                             <img src="${url}" alt="${obj.title}">
                             <div class="card">
                             <div class="group-icons">
@@ -124,7 +124,24 @@ function eventsTrending(gif){
     const handlerEventsForEacrhIcon = document.querySelectorAll(".icons");
     handlerEventsForEacrhIcon.forEach( btn => {
         btn.addEventListener("click",toggleEvent)
+    })
+    const cardMaxonMobile = document.getElementById(gif.id);
+    cardMaxonMobile.addEventListener("click",function(){
+        if(isMobile()){
+            searchById(gif.id);
+        }
     }) 
+}
+
+function isMobile(){
+    return (
+        (navigator.userAgent.match(/Android/i)) ||
+        (navigator.userAgent.match(/webOS/i)) ||
+        (navigator.userAgent.match(/iPhone/i)) ||
+        (navigator.userAgent.match(/iPod/i)) ||
+        (navigator.userAgent.match(/iPad/i)) ||
+        (navigator.userAgent.match(/BlackBerry/i))
+    );
 }
 
 function trTrending(data){
