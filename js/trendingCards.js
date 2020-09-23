@@ -12,7 +12,6 @@ async function getGif(){
     const API = 'https://api.giphy.com/v1/gifs/trending'; 
 
     const apiURL = API+'?api_key='+API_KEY+'&limit=12&rating=g';
-
     const response = await fetch(apiURL);
     const data = await response.json();
     showGif(data);

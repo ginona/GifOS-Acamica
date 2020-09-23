@@ -250,6 +250,7 @@ main #busqueda .search-btn {
   color: var(--gifos-principal-font);
   border-radius: 50%;
   background: none;
+  cursor: pointer;
 }
 
 main #busqueda .search-txt {
