@@ -3,11 +3,7 @@ const inputTextHeader = document.getElementById('search-txt-header')
 // const divResult = document.getElementById('search-resultados');
 
 
-async function getGif1(text, pag){
-    const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
-    const API = 'https://api.giphy.com/v1/gifs/search'; 
-
-    //const apiURL = API+'?api_key='+API_KEY+'&q=cat'+'&limit=20&rating=g&lang=en';
+async function getGifWithInput(text, pag){
     const apiURL = 'https://api.giphy.com/v1/gifs/search?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text+'&limit=12&offset='+pag+'&rating=g&lang=en';
     const response = await fetch(apiURL);
     const data = await response.json();
@@ -17,20 +13,20 @@ async function getGif1(text, pag){
 inputText.addEventListener('keyup', function(e){ 
     if(e.key === 'Enter'){
         const q = inputText.value;
-        generateViewResults(q);
+        showingViewResults(q);
     }
  })
 
  inputTextHeader.addEventListener('keyup', function(e){ 
     if(e.key === 'Enter'){
         const q = inputTextHeader.value;
-        generateViewResults(q);
+        showingViewResults(q);
     }
  })
 
-async function search1(text, pag){
+async function searchGifsFn(text, pag){
     const divResult = document.getElementById('gifs-container');
-    let searchResults = await getGif1(text, pag);
+    let searchResults = await getGifWithInput(text, pag);
     let resultHTML1 = '';
     searchResults.data.forEach(obj => {
          const url = obj.images.fixed_width.url
@@ -46,7 +42,7 @@ async function search1(text, pag){
              <div id="${obj.id}-max" class="icons icon-max"></div>
          </div>
          <div class="text-card">
-            <div class="text-card-user">${obj.username !== '' ? obj.username : 'User' }</div>
+             <div class="text-card-user">${obj.username !== '' ? obj.username : 'User' }</div>
              <h3 class="text-card-title">${obj.title}</h3>
         </div>
          </div>

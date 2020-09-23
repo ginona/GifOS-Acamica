@@ -1,10 +1,26 @@
-// import MaxGif from '../js/maxGif.js'
-
 const buttonPrev = document.getElementById('button-prev');
 const buttonNext = document.getElementById('button-next');
 const track = document.getElementById('track');
 const slickList = document.getElementById('slick-list');
 const slick = document.querySelectorAll('.slick');
+
+
+
+
+async function getGif(){
+    const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
+    const API = 'https://api.giphy.com/v1/gifs/trending'; 
+
+    const apiURL = API+'?api_key='+API_KEY+'&limit=12&rating=g';
+
+    const response = await fetch(apiURL);
+    const data = await response.json();
+    showGif(data);
+    trTrending(data);
+}
+
+getGif()
+
 
 const slickWidth = 275;
 
@@ -33,7 +49,7 @@ function Move(value){
 
 const resultsEl = document.getElementById('track')
 
-function search(data){
+function showGif(data){
     let resultHTML = '';
     data.data.forEach(obj => {
          const url = obj.images.fixed_width.url
@@ -59,34 +75,26 @@ function search(data){
      resultsEl.innerHTML = resultHTML
 }
 
-async function getGif(){
-    const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
-    const API = 'https://api.giphy.com/v1/gifs/trending'; 
 
-    const apiURL = API+'?api_key='+API_KEY+'&limit=12&rating=g';
-
-    const response = await fetch(apiURL);
-    const data = await response.json();
-    search(data);
-    trtrending(data);
+function addToLS(name,value) {
+    let extng = localStorage.getItem(name);
+    extng = extng ? JSON.parse(extng) : [];
+    extng.push(value);
+    localStorage.setItem(name,JSON.stringify(extng)); 
 }
 
-getGif()
-
-
-   function addToLS(name,value) {
-    let existing = localStorage.getItem(name);
-    existing = existing ? JSON.parse(existing) : [];
-    existing.push(value);
-    localStorage.setItem(name,JSON.stringify(existing)); 
+function addToFavs(gif) {
+    if(document.getElementById(`${gif.id}-add`).classList.contains('icon-heart--active') == false)
+    {
+        document.getElementById(`${gif.id}-add`).classList.add('icon-heart--active')
+        addToLS('Favourites',gif)
+    }else{
+        document.getElementById(`${gif.id}-add`).classList.remove('icon-heart--active')
+        rmFavourites(gif);
+    }
 }
 
-function addFavourites(gif) {
-    document.getElementById(`${gif.id}-add`).classList.add('icon-heart--active')
-    addToLS('Favourites',gif)
-}
-
-async function downloadFavourites(gif){
+async function downloadFavs(gif){
     let a = document.createElement('a');
     let response = await fetch(`${gif.images.downsized.url}`);
     let file = await response.blob();
@@ -96,23 +104,19 @@ async function downloadFavourites(gif){
     a.click();
 }
 
-function removeFavourites(gif) {
-    let data = JSON.parse(localStorage.getItem('Favorites'))
+function rmFavourites(gif) {
+    let data = JSON.parse(localStorage.getItem('Favourites'))
     data.forEach((ítem,index) => ítem.id === gif.id ? data.splice(index,1): null)
-    localStorage.setItem('Favorites',JSON.stringify(data))
-    document.getElementById(gif.id).remove()
+    localStorage.setItem('Favourites',JSON.stringify(data))
 }
 
-function events(gif){
+function eventsTrending(gif){
     const toggleEvent = e => {
-        if (e.currentTarget.id == `${gif.id}-remove`){
-            removeFavourites(gif);
-        }
         if (e.currentTarget.id == `${gif.id}-add`){
-            addFavourites(gif);
+            addToFavs(gif);
         }
         if (e.currentTarget.id == `${gif.id}-download`){
-            downloadFavourites(gif);
+            downloadFavs(gif);
         }
         if (e.currentTarget.id == `${gif.id}-max`){
             searchById(gif.id);
@@ -124,8 +128,8 @@ function events(gif){
     }) 
 }
 
-function trtrending(data){
-    data.data.map(function(gif){ let card =  events(gif)
+function trTrending(data){
+    data.data.map(function(gif){ let card =  eventsTrending(gif)
         return card;
     }).join('');
 }

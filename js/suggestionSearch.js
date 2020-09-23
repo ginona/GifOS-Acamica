@@ -42,19 +42,19 @@ fnAutoComplete()
     inputSearch.value = e.currentTarget.textContent;
     let list = document.getElementById('suggestions');
     list.innerHTML = '';
-    generateViewResults(searchTitle);
+    showingViewResults(searchTitle);
 }
 
 let pag = 12 ;
 async function searchMoreResults(textSearch) {
     pag = pag + 12;
     let gifsContainer = document.getElementById('gifs-container');
-    search1(textSearch, pag)
+    searchGifsFn(textSearch, pag)
 }
 
 
-async function generateViewResults (textSearch) {
-  let searchResults = await getGif1(textSearch);
+async function showingViewResults(textSearch) {
+  let searchResults = await getGifWithInput(textSearch);
   let giftSection = document.getElementById('trend-text');
   const divResultado = document.getElementById('search-resultados');
   const viewGifs = `
@@ -76,7 +76,7 @@ async function generateViewResults (textSearch) {
   `;
   if( searchResults.data.length !== 0 ){
       giftSection.innerHTML = viewGifs
-      search1(textSearch, 0)
+      searchGifsFn(textSearch, 0)
       let moreResults = document.getElementById('more-results')
       moreResults.addEventListener("click", function(){
           searchMoreResults(textSearch);

@@ -39,6 +39,7 @@ async function searchByIdAndLoad(gifWithId){
                 </div>
                 <div class="icon-text">
                     <div class="max-text">
+                        <div class="text-card-user">${gifWithId.data.username !== '' ? gifWithId.data.username : 'User' }</div>
                         <h3 class="text-card-title">${gifWithId.data.title}</h3>
                     </div>
                     <div class="iconos">

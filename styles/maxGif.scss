@@ -1,13 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
+
+:root[color-mode= "light"]{
+    --gifos-principal-font: #572EE5;
+    --gifos-background: #ffffff;
+    --gifos-trends-sub: #000000;
+  }
+
+:root[color-mode= "dark"]{
+    --gifos-principal-font: #ffffff;
+    --gifos-background: #37383C;
+    --gifos-trends-sub: #ffffff;
+}
+
 
 .modal{
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.9);
+    background-color: var(--gifos-background);
     position: fixed;
     z-index: 5000;
     left: 0;
@@ -40,6 +56,7 @@
     .max-text{
         width: 70%;
         word-wrap: break-word;
+        color: var(--gifos-trends-sub);
     }
     .iconos{
         display: flex;
@@ -52,6 +69,13 @@
     margin: 5% 3%;
     cursor: pointer;
     z-index: 6000;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--gifos-principal-font);
+    opacity: .9;
+}
+.cross:hover{
+ opacity: 1;
 }
 
 @media (min-width: 768px){
