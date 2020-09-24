@@ -280,7 +280,7 @@ main #trending .trend-text h2 {
   line-height: 25px;
 }
 
-main #trending .trend-text p {
+main #trending .trend-text div {
   text-align: center;
   color: var(--gifos-principal-font);
   font-size: 14px;
@@ -341,6 +341,17 @@ main #trending .tr-gifs .text-inside p {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.random-trend {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  cursor: pointer;
 }
 
 .search-btn {

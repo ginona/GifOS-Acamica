@@ -64,6 +64,37 @@ async function searchGifsFn(text, pag){
 
 }
 
+
+const getTextTrending = async () => {
+    const apiURL = 'https://api.giphy.com/v1/trending/searches?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
+    try{
+        const response = await fetch(apiURL)
+        const data = await response.json();
+        return data;
+    }catch (error) {
+        console.log('Fetch Error',error);
+    }
+}
+
+async function setTrendingText(){
+    let trends = await getTextTrending();
+    let trendLocation = document.getElementById("random-trend")
+    trendLocation. innerHTML = ''
+
+    for(let i = 0; i < 5; i++){
+        trendLocation.innerHTML += '<div class="trend-text-searched">'+trends.data[i]+','+'</div>'
+    }
+
+    //Click event and search
+    let trText = document.querySelectorAll('.trend-text-searched')
+    trText.forEach(div => div.addEventListener('click', e =>{
+        let str = e.currentTarget.textContent.substring(0, e.currentTarget.textContent.length - 1);
+        showingViewResults(str)
+    }))
+}
+
+setTrendingText()
+
 function showSearch(){
     let input = window.matchMedia("(min-width: 800px)");
     let y = window.scrollY;
