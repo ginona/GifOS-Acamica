@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/maxGif.css">
+    <link rel="stylesheet" href="styles/suggestionText.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/favsStyle.css">
     <title>GifOS</title>
@@ -14,19 +17,33 @@
         <img class="logo hideD" src="img/logo-mobile.svg" alt="logo1">
         <img class="logo hideL" src="img/logo-desktop-modo-noc.svg" alt="logo2">
 
-        <div id="headerCompleto">
-            <input class="menu-btn" type="checkbox" id="menu-btn">
-        <label class="menu-icon" id="menuIconId" for="menu-btn"><span id="nav-icon-id" class="nav-icon"></span></label>
-        <ul id="menu-ul" class="menu">
-            <li><a class="change-btn hideL">Modo Diurno</a></li>
-            <div class="borde hideL"><div class="borde2"></div></div>
-            <li><a class="change-btn hideD">Modo nocturno</a></li>
-            <div class="borde hideD"><div class="borde2"></div></div>
-            <li><a href="#favoritos">Favoritos</a></li>
-            <div class="borde"><div class="borde2"></div></div>
-            <li><a href="#misGifos">Mis GIFOS</a></li>
-            <div class="borde"><div class="borde2"></div></div>
-        </ul>
+        <!-- <div class="search-bar">
+            <div class="search-box-header hideSearch" id="hideSearch">
+                <div>
+                    <input id="search-txt-header" class="search-txt-header" type="text" name="search-txt" placeholder="Busca GIFOS y más">
+                    <a href="#" class="search-btn" id="search-btn-header"><i class="fa fa-search"></i></a>
+                </div>
+            </div>
+        </div> -->
+
+        <div>
+            <div id="headerCompleto">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+            <label class="menu-icon" id="menuIconId" for="menu-btn"><span id="nav-icon-id" class="nav-icon"></span></label>
+            <ul id="menu-ul" class="menu">
+                <li><a class="change-btn hideL">Modo Diurno</a><div class="borde hideL"><div class="borde2"></div></div></li>
+                <li><a class="change-btn hideD">Modo nocturno</a> 
+                <div class="borde hideD"><div class="borde2"></div></div>
+                </li>
+                <li><a href="./favoritos.html">Favoritos</a>
+                <div class="borde"><div class="borde2"></div></div>
+                </li>
+                <li><a href="#misGifos">Mis GIFOS</a>
+                <div class="borde"><div class="borde2"></div></div>
+                </li>
+                <li><a class="load-gif" href="#">+</a></li>
+            </ul>
+            </div>
         </div>
     </header>
     <main>
@@ -48,29 +65,40 @@
             <div class="image">
                 <img src="img/icon-favoritos.svg" alt="fav-logo">
             </div>
-            <div class="titulo"><h1>Favoritos</h1></div>
-            <div class="gifFav">
-                
+            <div class="titulo"><h1>Favoritos</h1></div><br><br><br>
+            <div class="gifFav" id="gifFav">
+                <div class="error-result-fav" id="error-result-fav">
+                </div>
+            </div><br><br>
+        </section>
+        <section id="results">
+            <div class="container-results">
+                <ul id="search-resultados" class="search-resultados"></ul>
             </div>
-
-
         </section>
         <section id="trending">
-            <div class="trend-text">
-                <h2>Trending: </h2>
-                <p>
-                    Reactions, Entertainment, Sports, Stickers, Artists
-                </p>
-            </div>
             <div class="tr-gifs"><br><br>
                 <div class="text-inside">
                     <h2>Trending GIFOS</h2><br>
                     <p>Mira los últimos GIFOS de nuestra comunidad.</p>
+                </div><br>
+                <div class="carousel">
+                    <button class="slick-arrow slick-prev" id="button-prev">
+                      <i class="fa fa-chevron-left svg-arrow"></i>
+                    </button>
+                    <div class="slick-list" id="slick-list">
+                      <div class="slick-track" id="track">
+                      </div>
+                    </div><br>
+                    <button class="slick-arrow slick-next" id="button-next">
+                      <i class="fa fa-chevron-right"></i>
+                    </button>
                 </div>
-
-                <br><br>
             </div>
         </section>
+        <div id="modal" class="modal">
+            <div class="cross" onclick="closeModal()">X</div>
+        </div>
     </main>
     <br><br>
     <footer>
@@ -85,6 +113,12 @@
             <p>© GIFOS 2020 All Rights Reserved.</p><br>
         </section>
     </footer>
+    
     <script src="js/darkMode.js"></script>
+    <!-- <script src="js/searchGifs.js"></script> -->
+    <script src="js/trendingCards.js"></script>
+    <script src="js/favouritesGifs.js"></script>
+    <!-- <script src="js/suggestionSearch.js"></script> -->
+    <script src="js/maxGif.js"></script>
 </body>
 </html>
