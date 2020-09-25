@@ -280,7 +280,7 @@ main #trending .trend-text h2 {
   line-height: 25px;
 }
 
-main #trending .trend-text div {
+main #trending .trend-text .random-trend {
   text-align: center;
   color: var(--gifos-principal-font);
   font-size: 14px;
