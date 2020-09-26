@@ -48,8 +48,11 @@
 }
 
 .gifFav{
-    text-align: center;
+    // 
     margin: 0 5%;
+    .image-no-fav{
+        text-align: center;
+    }
     p{
         font-family: 'Montserrat', sans-serif;
         font-size: 17px;

@@ -157,7 +157,7 @@
           box-sizing: border-box;
 }
 
-.icons {
+.icons, .icons-fav {
   opacity: 0.5;
   right: 0;
   width: 32px;
@@ -170,7 +170,7 @@
   cursor: pointer;
 }
 
-.icons:hover {
+.icons:hover, .icons-fav:hover {
   opacity: 1;
 }
 

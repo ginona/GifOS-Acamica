@@ -58,7 +58,6 @@ function showGif(data){
                             <img src="${url}" alt="${obj.title}">
                             <div class="card">
                             <div class="group-icons">
-                                <div id="${obj.id}-remove" class="icons icon-delete"></div>
                                 <div id="${obj.id}-add" class="icons icon-heart"></div>
                                 <div id="${obj.id}-download" class="icons icon-download"></div>
                                 <div id="${obj.id}-max" class="icons icon-max"></div>
@@ -131,6 +130,43 @@ function eventsTrending(gif){
             searchById(gif.id);
         }
     }) 
+}
+
+function eventsTrendingFav(gif){
+    const toggleEvent = e => {
+        if (e.currentTarget.id == `${gif.id}-add`){
+            addToFavsFav(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-download`){
+            downloadFavs(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-max`){
+            searchByIdFav(gif.id);
+        }
+    };
+    const handlerEventsForEacrhIcon = document.querySelectorAll(".icons-fav");
+    handlerEventsForEacrhIcon.forEach( btn => {
+        btn.addEventListener("click",toggleEvent)
+    })
+    const cardMaxonMobile = document.getElementById(gif.id);
+    cardMaxonMobile.addEventListener("click",function(){
+        if(isMobile()){
+            searchByIdFav(gif.id);
+        }
+    }) 
+}
+
+
+function addToFavsFav(gif) {
+    if(document.getElementById(`${gif.id}-add`).classList.contains('icon-heart--active') == false)
+    {
+        document.getElementById(`${gif.id}-add`).classList.add('icon-heart--active')
+        addToLS('Favourites',gif)
+    }else{
+        document.getElementById(`${gif.id}-add`).classList.remove('icon-heart--active')
+        document.getElementById(`${gif.id}-add`).classList.add('icon-heart')
+        rmFavourites(gif);
+    }
 }
 
 function isMobile(){

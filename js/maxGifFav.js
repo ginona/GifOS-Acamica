@@ -1,20 +1,20 @@
-var modal = document.getElementById("modal")
+var modal = document.getElementById("modalFav")
 
 
 function closeModal(){
     modal.style.display = 'none';
 }
 
-async function searchById(gifId){
+async function searchByIdFav(gifId){
     const api_url = 'https://api.giphy.com/v1/gifs/'+gifId+'?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs';
 
     const response = await fetch(api_url);
     const data = await response.json();
-    searchByIdAndLoad(data)
-    eventsMaxGif(data)
+    searchByIdAndLoadFav(data)
+    eventsMaxGifFav(data.data)
 }
 
-async function searchByIdAndLoad(gifWithId){
+async function searchByIdAndLoadFav(gifWithId){
     let resultHTML = '';
          const url = gifWithId.data.images.fixed_width.url
 
@@ -30,7 +30,7 @@ async function searchByIdAndLoad(gifWithId){
                         <h3 class="text-card-title">${gifWithId.data.title}</h3>
                     </div>
                     <div class="iconos">
-                    <div id="${gifWithId.data.id}-add-max-gif" class="icons icon-heart"></div>
+                    <div id="${gifWithId.data.id}-add-max-gif" class="icons icon-heart--active"></div>
                     <div id="${gifWithId.data.id}-download-max-gif" class="icons icon-download"></div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@ async function searchByIdAndLoad(gifWithId){
 }
 
 
-function addToLSMaxGif(name,value) {
+function addToLSMaxGifFav(name,value) {
     let existing = localStorage.getItem(name);
     existing = existing ? JSON.parse(existing) : [];
     existing.push(value);
@@ -50,41 +50,41 @@ function addToLSMaxGif(name,value) {
 }
 
 
-function addFavMax(gif) {
-    let elementMax = document.getElementById(`${gif.data.id}-add-max-gif`)
+function addFavMaxFav(gif) {
+    let elementMax = document.getElementById(`${gif.id}-add-max-gif`)
 
     if(elementMax.classList.contains('icon-heart--active') == false){
         elementMax.classList.add('icon-heart--active')
-        addToLSMaxGif('Favourites',)
+        addToLSMaxGifFav('Favourites',gif)
     }else{
         elementMax.classList.remove('icon-heart--active')
-        rmFavMax(gif)
+        elementMax.classList.add('icon-heart')
+        rmFavMaxFav(gif)
     }
-
 }
 
-async function downloadFavMax(gif){
+async function downloadFavMaxFav(gif){
     let a = document.createElement('a');
-    let response = await fetch(`${gif.data.images.downsized.url}`);
+    let response = await fetch(`${gif.images.downsized.url}`);
     let file = await response.blob();
-    a.download = `${gif.data.title}`;
+    a.download = `${gif.title}`;
     a.href = window.URL.createObjectURL(file);
     a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
     a.click();
 }
-function rmFavMax(gif) {
+function rmFavMaxFav(gif) {
     let data = JSON.parse(localStorage.getItem('Favourites'))
     data.forEach((ítem,index) => ítem.id === gif.id ? data.splice(index,1): null)
     localStorage.setItem('Favourites',JSON.stringify(data))
 }
 
-function eventsMaxGif(gif){
+function eventsMaxGifFav(gif){
     const toggleEvent = e => {
-        if (e.currentTarget.id == `${gif.data.id}-add-max-gif`){
-            addFavMax(gif);
+        if (e.currentTarget.id == `${gif.id}-add-max-gif`){
+            addFavMaxFav(gif);
         }
-        if (e.currentTarget.id == `${gif.data.id}-download-max-gif`){
-            downloadFavMax(gif)
+        if (e.currentTarget.id == `${gif.id}-download-max-gif`){
+            downloadFavMaxFav(gif)
         }
     };
     const handlerEventsForEacrhIcon = document.querySelectorAll(".icons");

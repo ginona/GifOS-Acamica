@@ -14,18 +14,10 @@
 </head>
 <body>
     <header class="header">
+        <a href="./index.html">
         <img class="logo hideD" src="img/logo-mobile.svg" alt="logo1">
         <img class="logo hideL" src="img/logo-desktop-modo-noc.svg" alt="logo2">
-
-        <!-- <div class="search-bar">
-            <div class="search-box-header hideSearch" id="hideSearch">
-                <div>
-                    <input id="search-txt-header" class="search-txt-header" type="text" name="search-txt" placeholder="Busca GIFOS y más">
-                    <a href="#" class="search-btn" id="search-btn-header"><i class="fa fa-search"></i></a>
-                </div>
-            </div>
-        </div> -->
-
+        </a>
         <div>
             <div id="headerCompleto">
                 <input class="menu-btn" type="checkbox" id="menu-btn">
@@ -35,7 +27,7 @@
                 <li><a class="change-btn hideD">Modo nocturno</a> 
                 <div class="borde hideD"><div class="borde2"></div></div>
                 </li>
-                <li><a href="./favoritos.html">Favoritos</a>
+                <li><a href="#">Favoritos</a>
                 <div class="borde"><div class="borde2"></div></div>
                 </li>
                 <li><a href="#misGifos">Mis GIFOS</a>
@@ -47,20 +39,6 @@
         </div>
     </header>
     <main>
-        <!-- <section id="titulo">
-            <h1>Inspírate, busca, guarda, y crea los mejores <span>GIFOS</span></h1>
-        </section>
-        <section id="busqueda">
-            <div class="image-search">
-                <img src="img/ilustra_header.svg" alt="imagen-busqueda">
-            </div>
-            <div class="search-box">
-                <input class="search-txt" type="text" name="" placeholder="Busca GIFOS y más">
-                <a href="#" class="search-btn">
-                <i class="fa fa-search"></i>
-                </a>
-            </div>
-        </section> -->
         <section id="favoritos">
             <div class="image">
                 <img src="img/icon-favoritos.svg" alt="fav-logo">
@@ -99,6 +77,9 @@
         <div id="modal" class="modal">
             <div class="cross" onclick="closeModal()">X</div>
         </div>
+        <div id="modalFav" class="modal">
+            <div class="cross" onclick="closeModal()">X</div>
+        </div>
     </main>
     <br><br>
     <footer>
@@ -118,7 +99,7 @@
     <!-- <script src="js/searchGifs.js"></script> -->
     <script src="js/trendingCards.js"></script>
     <script src="js/favouritesGifs.js"></script>
-    <!-- <script src="js/suggestionSearch.js"></script> -->
+    <script src="js/maxGifFav.js"></script>
     <script src="js/maxGif.js"></script>
 </body>
 </html>

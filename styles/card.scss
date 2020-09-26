@@ -128,8 +128,7 @@
     opacity: 1;
     box-sizing: border-box;
 }
-
-.icons {
+.icons, .icons-fav {
     opacity: 0.5;
     right: 0;
     width: 32px;
@@ -141,7 +140,7 @@
     border-radius: 6px;
     cursor: pointer;
 }
-.icons:hover {
+.icons:hover,.icons-fav:hover {
     opacity: 1;
 }
 .icon-heart {

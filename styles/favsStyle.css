@@ -48,8 +48,11 @@
 }
 
 .gifFav {
-  text-align: center;
   margin: 0 5%;
+}
+
+.gifFav .image-no-fav {
+  text-align: center;
 }
 
 .gifFav p {
