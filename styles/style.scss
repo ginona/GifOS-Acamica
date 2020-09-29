@@ -41,6 +41,10 @@
 }
 body{
     background: var(--gifos-background);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between
 }
 
 .header{
@@ -157,8 +161,8 @@ body{
     display: none;
 }
 main{
+
     padding-top: 40%;
-    
     #titulo{
         margin: 0 5%;
         font-family: 'Montserrat', sans-serif;
@@ -448,7 +452,25 @@ footer{
                 transition: 0.4s;
             }
         }
+    }//CloseMain
+
+    footer{
+        top: 10%;
+        #redes{
+            all: unset;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: space-around;
+
+        }
     }
+    .social-media-footer{
+        display: flex;
+    }
+    .social-media{
+        margin-left: 20px;
+    }
+
     .gifs-container{
         grid-template-columns: repeat(4, 1fr);
     }

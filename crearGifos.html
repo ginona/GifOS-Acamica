@@ -6,18 +6,18 @@
     <script src="js/darkMode.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/crearGifos.css">
     <link rel="stylesheet" href="styles/card.css">
-    <link rel="stylesheet" href="styles/maxGif.css">
-    <link rel="stylesheet" href="styles/suggestionText.css">
     <link rel="stylesheet" href="styles/style.css">
     
     <title>GifOS</title>
 </head>
 <body>
     <header class="header">
-        <img class="logo hideD" src="img/logo-mobile.svg" alt="logo1">
-        <img class="logo hideL" src="img/logo-desktop-modo-noc.svg" alt="logo2">
-
+        <a href="./index.html">
+            <img class="logo hideD" src="img/logo-mobile.svg" alt="logo1">
+            <img class="logo hideL" src="img/logo-desktop-modo-noc.svg" alt="logo2">
+            </a>
         <div class="search-bar">
             <div class="search-box-header hideSearch" id="hideSearch">
                 <div>
@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <div id="headerCompleto">
                 <input class="menu-btn" type="checkbox" id="menu-btn">
@@ -42,62 +41,54 @@
                 <li><a href="./misGifos.html">Mis GIFOS</a>
                 <div class="borde"><div class="borde2"></div></div>
                 </li>
-                <li><a class="load-gif" href="./crearGifos.html">+</a></li>
+                <li><a class="load-gif" href="#">+</a></li>
             </ul>
             </div>
         </div>
     </header>
     <main>
-        <section id="titulo">
-            <h1>Inspírate, busca, guarda, y crea <br>los mejores <span>GIFOS</span></h1>
-        </section>
-        <section id="busqueda">
-            <div class="image-search">
-                <img src="img/ilustra_header.svg" alt="imagen-busqueda">
+        <div class="container-create-gifos">
+            <div class="container-camera">
+                <img src="img/camara.svg" alt="camara">
+                <img class="light-camera" src="img/element-luz-camara.svg" alt="luz-camara">
             </div>
-                <div class="search-bar">
-            <div class="search-box">
-                    <div>
-                        <input id="search-txt" class="search-txt" type="text" name="search-txt" placeholder="Busca GIFOS y más">
-                        <a class="search-btn" id="search-btn"><i class="fa fa-search"></i></a>
+            <div class="container-maker">
+                <div class="container-making">
+                    <div class="half-square">
+                        <div class="half-square-inside-tl"></div>
+                        <div class="half-square-inside-tr"></div>
                     </div>
-                <div class="suggestions" id="suggestions"></div>
-            </div>
+                    <div class="text-inside-create" id="container-video">
+                                <h1>Aquí podrás <br>crear tus propios <span>GIFOS</span></h1>
+                                <p>¡Crea tu GIFO en sólo 3 pasos!</p>
+                                <p>(sólo necesitas una cámara para grabar un video)</p>
+                    </div>
+                    <div class="half-square">
+                        <div class="half-square-inside-bl"></div>
+                        <div class="half-square-inside-br"></div>
+                    </div>
                 </div>
-
-        </section>
-        <section id="results">
-            <div class="container-results">
-                <ul id="search-resultados" class="search-resultados"></ul>
-            </div>
-        </section>
-        <section id="trending">
-            <div class="trend-text" id="trend-text">
-                <h2>Trending: </h2>
-                <div id="random-trend" class="random-trend">
-                </div>
-            </div>
-            <div class="tr-gifs"><br><br>
-                <div class="text-inside">
-                    <h2>Trending GIFOS</h2><br>
-                    <p>Mira los últimos GIFOS de nuestra comunidad.</p>
-                </div><br>
-                <div class="carousel">
-                    <button class="slick-arrow slick-prev" id="button-prev">
-                      <i class="fa fa-chevron-left svg-arrow"></i>
-                    </button>
-                    <div class="slick-list" id="slick-list">
-                      <div class="slick-track" id="track">
-                      </div>
-                    </div><br>
-                    <button class="slick-arrow slick-next" id="button-next">
-                      <i class="fa fa-chevron-right"></i>
-                    </button>
+                <div class="container-control">
+                    <div class="container-steps">
+                        <div class="step">1</div>
+                        <div class="step">2</div>
+                        <div class="step">3</div>
+                        <div class="repeat-capture"><p>REPETIR CAPTURA</p></div>
+                    </div>
+                    <div class="container-line"></div><br>
+                    <div class="container-buttons">
+                        <div class="button-cgf">Comenzar</div>
+                        <div class="button-cgf hideBtn">Grabar</div>
+                        <div class="button-cgf hideBtn">Finalizar</div>
+                        <div class="button-cgf hideBtn">Subir Gifo</div>
+                    </div>
                 </div>
             </div>
-        </section>
-        <div id="modal" class="modal">
-            <div class="cross" onclick="closeModal()">X</div>
+            <div class="container-roll">
+                <div>
+                    <img src="img/pelicula.svg" alt="pelicula">
+                </div>
+            </div>
         </div>
     </main>
     <br><br>
@@ -116,10 +107,6 @@
         </section>
     </footer>
     <script src="js/darkMode.js"></script>
-    <script src="js/searchGifs.js"></script>
-    <script src="js/trendingCards.js"></script>
-    <script src="js/suggestionSearch.js"></script>
-    <script src="js/maxGif.js"></script>
-
+    <script src="js/crearGifos.js"></script>
 </body>
 </html>

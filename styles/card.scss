@@ -1,3 +1,23 @@
+:root[color-mode= "light"]{
+    --gifos-principal-font: #572EE5;
+    --gifos-trending-back: #F3F5F8;
+
+  }
+
+:root[color-mode= "dark"]{
+    --gifos-principal-font: #ffffff;//si
+    --gifos-trending-back: #222326;//si
+}
+
+:root[color-mode="light"] .hideL{
+    display: none;
+}
+:root[color-mode="dark"] .hideD{
+    display: none;
+}
+
+
+
 .carousel{
     width: 100%;
     h2{
@@ -73,14 +93,14 @@
 }
 
 .slick-arrow{
-    background-color: #ffffff;
+    background-color: var(--gifos-trending-back);
     position: absolute;
     z-index: 4;
     width: 48px;
     height: 48px;
     text-align: center;
     box-shadow: 0 2px 5px 9 rgba(0,0,0,.15);
-    border: 1px solid #572EE5;
+    border: 1px solid var(--gifos-principal-font);
     cursor: pointer;
     &:focus{
         outline: 0;
@@ -88,14 +108,14 @@
     i{
         font-size: 18px;
         font-weight: lighter;
-        color: #572EE5;
+        color: var(--gifos-principal-font);
     }
 }
 
 .slick-arrow:hover{
-    background-color: #572EE5;
+    background-color: var(--gifos-principal-font);
     i{
-        color: #ffffff;
+        color: var(--gifos-trending-back);
     }
 }
 

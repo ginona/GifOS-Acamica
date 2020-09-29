@@ -51,11 +51,11 @@ function addToLSMaxGif(name,value) {
 
 
 function addFavMax(gif) {
-    let elementMax = document.getElementById(`${gif.data.id}-add-max-gif`)
+    let elementMax = document.getElementById(`${gif.id}-add-max-gif`)
 
     if(elementMax.classList.contains('icon-heart--active') == false){
         elementMax.classList.add('icon-heart--active')
-        addToLSMaxGif('Favourites',)
+        addToLSMaxGif('Favourites',gif)
     }else{
         elementMax.classList.remove('icon-heart--active')
         rmFavMax(gif)
@@ -81,7 +81,7 @@ function rmFavMax(gif) {
 function eventsMaxGif(gif){
     const toggleEvent = e => {
         if (e.currentTarget.id == `${gif.data.id}-add-max-gif`){
-            addFavMax(gif);
+            addFavMax(gif.data);
         }
         if (e.currentTarget.id == `${gif.data.id}-download-max-gif`){
             downloadFavMax(gif)

@@ -44,6 +44,17 @@
 
 body {
   background: var(--gifos-background);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .header {
@@ -539,6 +550,26 @@ footer #redes .social-media a:hover {
     margin-left: 5%;
     -webkit-transition: 0.4s;
     transition: 0.4s;
+  }
+  footer {
+    top: 10%;
+  }
+  footer #redes {
+    all: unset;
+    font-family: 'Roboto', sans-serif;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .social-media-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .social-media {
+    margin-left: 20px;
   }
   .gifs-container {
     -ms-grid-columns: (1fr)[4];

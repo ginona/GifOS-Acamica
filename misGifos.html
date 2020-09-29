@@ -1,32 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" color-mode="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/darkMode.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/maxGif.css">
     <link rel="stylesheet" href="styles/suggestionText.css">
     <link rel="stylesheet" href="styles/style.css">
-    
+    <link rel="stylesheet" href="styles/favsStyle.css">
     <title>GifOS</title>
 </head>
 <body>
     <header class="header">
+        <a href="./index.html">
         <img class="logo hideD" src="img/logo-mobile.svg" alt="logo1">
         <img class="logo hideL" src="img/logo-desktop-modo-noc.svg" alt="logo2">
-
-        <div class="search-bar">
-            <div class="search-box-header hideSearch" id="hideSearch">
-                <div>
-                    <input id="search-txt-header" class="search-txt-header" type="text" name="search-txt" placeholder="Busca GIFOS y más">
-                    <a href="#" class="search-btn" id="search-btn-header"><i class="fa fa-search"></i></a>
-                </div>
-            </div>
-        </div>
-
+        </a>
         <div>
             <div id="headerCompleto">
                 <input class="menu-btn" type="checkbox" id="menu-btn">
@@ -39,7 +30,7 @@
                 <li><a href="./favoritos.html">Favoritos</a>
                 <div class="borde"><div class="borde2"></div></div>
                 </li>
-                <li><a href="./misGifos.html">Mis GIFOS</a>
+                <li><a href="#misGifos">Mis GIFOS</a>
                 <div class="borde"><div class="borde2"></div></div>
                 </li>
                 <li><a class="load-gif" href="./crearGifos.html">+</a></li>
@@ -48,35 +39,22 @@
         </div>
     </header>
     <main>
-        <section id="titulo">
-            <h1>Inspírate, busca, guarda, y crea <br>los mejores <span>GIFOS</span></h1>
-        </section>
-        <section id="busqueda">
-            <div class="image-search">
-                <img src="img/ilustra_header.svg" alt="imagen-busqueda">
+        <section id="mis-gifos">
+            <div class="image">
+                <img src="img/icon-mis-gifos.svg" alt="fav-logo">
             </div>
-                <div class="search-bar">
-            <div class="search-box">
-                    <div>
-                        <input id="search-txt" class="search-txt" type="text" name="search-txt" placeholder="Busca GIFOS y más">
-                        <a class="search-btn" id="search-btn"><i class="fa fa-search"></i></a>
-                    </div>
-                <div class="suggestions" id="suggestions"></div>
-            </div>
+            <div class="titulo"><h1>Mis GIFOS</h1></div><br><br><br>
+            <div class="gifFav" id="gifMine">
+                <div class="error-result-fav" id="error-result-mine-gif">
                 </div>
-
+            </div><br><br>
         </section>
-        <section id="results">
+        <!-- <section id="results">
             <div class="container-results">
                 <ul id="search-resultados" class="search-resultados"></ul>
             </div>
-        </section>
+        </section> -->
         <section id="trending">
-            <div class="trend-text" id="trend-text">
-                <h2>Trending: </h2>
-                <div id="random-trend" class="random-trend">
-                </div>
-            </div>
             <div class="tr-gifs"><br><br>
                 <div class="text-inside">
                     <h2>Trending GIFOS</h2><br>
@@ -99,6 +77,9 @@
         <div id="modal" class="modal">
             <div class="cross" onclick="closeModal()">X</div>
         </div>
+        <div id="modalFav" class="modal">
+            <div class="cross" onclick="closeModal()">X</div>
+        </div>
     </main>
     <br><br>
     <footer>
@@ -115,11 +96,11 @@
             <div><p>© GIFOS 2020 All Rights Reserved.</p><br></div>
         </section>
     </footer>
+    
     <script src="js/darkMode.js"></script>
-    <script src="js/searchGifs.js"></script>
+    <!-- <script src="js/searchGifs.js"></script> -->
     <script src="js/trendingCards.js"></script>
-    <script src="js/suggestionSearch.js"></script>
+    <script src="js/misGifos.js"></script>
     <script src="js/maxGif.js"></script>
-
 </body>
 </html>
