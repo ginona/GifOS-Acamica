@@ -58,10 +58,12 @@
                         <div class="half-square-inside-tl"></div>
                         <div class="half-square-inside-tr"></div>
                     </div>
-                    <div class="text-inside-create" id="container-video">
-                                <h1>Aquí podrás <br>crear tus propios <span>GIFOS</span></h1>
-                                <p>¡Crea tu GIFO en sólo 3 pasos!</p>
-                                <p>(sólo necesitas una cámara para grabar un video)</p>
+                    <div class="flex-text-create">
+                        <div class="text-inside-create" id="container-video">
+                            <h1>Aquí podrás <br>crear tus propios <span>GIFOS</span></h1>
+                            <p>¡Crea tu GIFO en sólo 3 pasos!</p>
+                            <p>(sólo necesitas una cámara para grabar un video)</p>
+                        </div>
                     </div>
                     <div class="half-square">
                         <div class="half-square-inside-bl"></div>
@@ -69,18 +71,19 @@
                     </div>
                 </div>
                 <div class="container-control">
-                    <div class="container-steps">
-                        <div class="step">1</div>
-                        <div class="step">2</div>
-                        <div class="step">3</div>
-                        <div class="repeat-capture"><p>REPETIR CAPTURA</p></div>
+                    <div id="container-steps" class="container-steps">
+                        <div id="step-1" class="step">1</div>
+                        <div id="step-2" class="step">2</div>
+                        <div id="step-3" class="step">3</div>
+                        <div id="repeat" class="repeat-capture hideBtn"><p>REPETIR CAPTURA</p></div>
+                        <div id="timing" class="time-recording hideBtn">00:00:00</div>
                     </div>
                     <div class="container-line"></div><br>
                     <div class="container-buttons">
-                        <div class="button-cgf">Comenzar</div>
-                        <div class="button-cgf hideBtn">Grabar</div>
-                        <div class="button-cgf hideBtn">Finalizar</div>
-                        <div class="button-cgf hideBtn">Subir Gifo</div>
+                        <div id="starting" class="button-cgf">Comenzar</div>
+                        <div id="recording" class="button-cgf hideBtn">Grabar</div>
+                        <div id="finishing" class="button-cgf hideBtn">Finalizar</div>
+                        <div id="uploading" class="button-cgf hideBtn">Subir Gifo</div>
                     </div>
                 </div>
             </div>
@@ -107,6 +110,7 @@
         </section>
     </footer>
     <script src="js/darkMode.js"></script>
+    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
     <script src="js/crearGifos.js"></script>
 </body>
 </html>

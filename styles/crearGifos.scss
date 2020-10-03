@@ -55,6 +55,11 @@
     margin: 0 1%;
 }
 
+.flex-text-create{
+    display: flex;
+    justify-content: center;
+}
+
 .container-making{
     margin: 0 auto;
     padding: 10px;
@@ -119,6 +124,8 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    max-height: 300px;
+    max-width: 500px;
     h1{
         font-family: 'Montserrat', sans-serif;
         color: var(--gifos-principal-font);
@@ -131,6 +138,7 @@
         color: var(--gifos-trends-sub);
     }
 }
+
 .container-steps{
     display: flex;
     margin: 15px 0;
@@ -147,12 +155,36 @@
     border-radius: 50%;
     padding: 3px 10px;
     margin: 0 10px;
-    transform: translateX(200%);
+    // transform: translateX(200%);
     cursor: pointer;
 }
 .step:hover{
     background-color: var(--gifos-principal-font);
     color: var(--gifos-background);
+}
+
+.step-selected{
+    background-color: var(--gifos-principal-font);
+    color: var(--gifos-background);
+
+}
+
+.video-card{
+    display: none;
+    position: absolute;
+    max-height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(87,46,229,0.70);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h3{
+        color: white;
+    }
 }
 
 .repeat-capture{
@@ -164,6 +196,14 @@
     p:hover{
         border-bottom: 2px solid var(--gifos-span);
     }
+}
+
+.time-recording{
+    font-size: 13px;
+    color: var(--gifos-principal-font);
+    transform: translate(320%,20%);
+    font-weight: 700;
+    
 }
 
 .container-line{
