@@ -147,7 +147,7 @@
     opacity: 1;
     box-sizing: border-box;
 }
-.icons, .icons-fav {
+.icons, .icons-fav, .icons-delete {
     opacity: 0.5;
     right: 0;
     width: 32px;
@@ -159,7 +159,7 @@
     border-radius: 6px;
     cursor: pointer;
 }
-.icons:hover,.icons-fav:hover {
+.icons:hover,.icons-fav:hover, .icons-delete:hover {
     opacity: 1;
 }
 .icon-heart {
@@ -176,7 +176,6 @@
 }
 .icon-delete {
     background-image: url("../img/icon_trash.svg");
-    visibility: hidden;
 }
 .group-icons {
     position: absolute;

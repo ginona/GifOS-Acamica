@@ -4,6 +4,12 @@
 function fnAutoComplete(){
   searchInput.addEventListener('keyup', async (event) =>{
       let sug = await getAutoComplete(searchInput.value);
+      document.getElementById('search-btn').style.display = 'none'
+      document.getElementById('clean-btn').style.display = 'block'
+      if(searchInput.value == ''){
+        document.getElementById('search-btn').style.display = 'block'
+        document.getElementById('clean-btn').style.display = 'none'
+      }
       suggestionsPanel.style.borderTop = "1px solid rgba(156, 175, 195 ,.5)";
       const view = `
         <ul class="suggestions">
@@ -24,6 +30,12 @@ function fnAutoComplete(){
   })
 }
 fnAutoComplete()
+
+document.getElementById('clean-btn').addEventListener('click', function(){
+  document.getElementById('search-txt').value = ''
+  document.getElementById('search-btn').style.display = 'block'
+  document.getElementById('clean-btn').style.display = 'none'
+})
 
  async function getAutoComplete(text){
     const url = 'https://api.giphy.com/v1/gifs/search/tags?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text;

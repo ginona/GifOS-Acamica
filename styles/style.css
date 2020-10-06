@@ -58,7 +58,7 @@ body {
 }
 
 .header {
-  border-top: 5px solid var(--gifos-principal-font);
+  border-top: 5px solid var(--gifos-ulback);
   font-family: 'Roboto', sans-serif;
   background-color: var(--gifos-background);
   -webkit-box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
@@ -428,7 +428,7 @@ main #trending .tr-gifs .text-inside p {
 }
 
 footer {
-  border-bottom: 5px solid var(--gifos-principal-font);
+  border-bottom: 5px solid var(--gifos-ulback);
 }
 
 footer #redes {
@@ -447,6 +447,14 @@ footer #redes .social-media a {
 
 footer #redes .social-media a:hover {
   color: #572EE5;
+}
+
+.noneDisplayed {
+  display: none;
+}
+
+.noneDisplayedFavs {
+  display: none;
 }
 
 @media (min-width: 720px) {

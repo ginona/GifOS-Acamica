@@ -48,7 +48,7 @@ body{
 }
 
 .header{
-    border-top: 5px solid var(--gifos-principal-font);
+    border-top: 5px solid var(--gifos-ulback);
     font-family: 'Roboto', sans-serif;
     background-color: var(--gifos-background);
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
@@ -335,7 +335,7 @@ main{
 }
 
 footer{
-    border-bottom: 5px solid var(--gifos-principal-font);
+    border-bottom: 5px solid var(--gifos-ulback);
     #redes{
         font-family: 'Roboto', sans-serif;
         text-align: center;
@@ -353,6 +353,14 @@ footer{
 
         }
     }
+}
+
+.noneDisplayed{
+    display: none;
+}
+
+.noneDisplayedFavs{
+    display: none;
 }
 
 @media (min-width: 720px){

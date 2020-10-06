@@ -104,8 +104,15 @@ async function downloadFavs(gif){
 
 function rmFavourites(gif) {
     let data = JSON.parse(localStorage.getItem('Favourites'))
-    data.forEach((ítem,index) => ítem.id === gif.id ? data.splice(index,1): null)
+    
+    data.forEach((item,index) => item.id === gif.id ? data.splice(index,1): null)
     localStorage.setItem('Favourites',JSON.stringify(data))
+}
+function rmMisGifos(gif) {
+    let data = JSON.parse(localStorage.getItem('MyGifs'))
+    data.forEach((item,index) => item === gif.id ? data.splice(index,1): null)
+    localStorage.setItem('MyGifs',JSON.stringify(data))
+    location.reload()
 }
 
 function eventsTrending(gif){
@@ -120,8 +127,8 @@ function eventsTrending(gif){
             searchById(gif.id);
         }
     };
-    const handlerEventsForEacrhIcon = document.querySelectorAll(".icons");
-    handlerEventsForEacrhIcon.forEach( btn => {
+    const handlerEventsForEachIcon = document.querySelectorAll(".icons");
+    handlerEventsForEachIcon.forEach( btn => {
         btn.addEventListener("click",toggleEvent)
     })
     const cardMaxonMobile = document.getElementById(gif.id);
@@ -144,14 +151,38 @@ function eventsTrendingFav(gif){
             searchByIdFav(gif.id);
         }
     };
-    const handlerEventsForEacrhIcon = document.querySelectorAll(".icons-fav");
-    handlerEventsForEacrhIcon.forEach( btn => {
+    const handlerEventsForEachIcon = document.querySelectorAll(".icons-fav");
+    handlerEventsForEachIcon.forEach( btn => {
         btn.addEventListener("click",toggleEvent)
     })
     const cardMaxonMobile = document.getElementById(gif.id);
     cardMaxonMobile.addEventListener("click",function(){
         if(isMobile()){
             searchByIdFav(gif.id);
+        }
+    }) 
+}
+
+function eventsTrendingDelete(gif){
+    const toggleEvent = e => {
+        if (e.currentTarget.id == `${gif.id}-delete`){
+            rmMisGifos(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-download`){
+            downloadFavs(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-max`){
+            searchByIdDelete(gif.id);
+        }
+    };
+    const handlerEventsForEachIcon = document.querySelectorAll(".icons-delete");
+    handlerEventsForEachIcon.forEach( btn => {
+        btn.addEventListener("click",toggleEvent)
+    })
+    const cardMaxonMobile = document.getElementById(gif.id);
+    cardMaxonMobile.addEventListener("click",function(){
+        if(isMobile()){
+            searchByIdDelete(gif.id);
         }
     }) 
 }

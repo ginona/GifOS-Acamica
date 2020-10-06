@@ -35,6 +35,12 @@ function catchingSteps(value){
         case 5:
             document.getElementById('step-2').classList.remove('step-selected')
             document.getElementById('step-3').classList.add('step-selected')
+            // document.getElementById('repeat').style.display = 'none'
+            
+            break;
+        case 6:
+            document.getElementById('uploading').style.display = 'none'
+            document.getElementById('step-3').classList.remove('step-selected')
             break;
         default:
           console.log("Error")
@@ -74,7 +80,7 @@ function startingRecord(){
             videoRecording.play()
             recorder.startRecording()
             catchingSteps(3)
-            timer(true)
+            clock(true)
         })
         let finishRecord = document.getElementById('finishing')
         let blob
@@ -85,7 +91,7 @@ function startingRecord(){
                 })
                 videoRecording.pause()
                 catchingSteps(4)
-                timer(false)
+                clock(false)
             }, 1000);
         })
         let uploadRecord = document.getElementById('uploading')
@@ -121,41 +127,43 @@ async function uploadGif (file) {
                           <h3>Estamos subiendo tu GIFO</h3>`
     containerVideo.appendChild(cardLoad)
     let postGif = await postGifos(file);
-    addToLocalStorage('MyGifs',postGif.data.id)
+    addingLS('MyGifs',postGif.data.id)
     cardLoad.innerHTML = `<img src="/img/ok.svg" alt="loader"><br>
                           <h3>GIFO subido con éxito</h3>`
                           console.log("Uploaded")
 }
 
-function addToLocalStorage(name,value) {
-    let existing = localStorage.getItem(name);
-    existing = existing ? JSON.parse(existing) : [];
-    existing.push(value);
-    localStorage.setItem(name,JSON.stringify(existing));
+document.getElementById('repeat').addEventListener('click', function(){
+    window.location.reload();
+})
+
+function addingLS(name,value) {
+    let createdGifs = localStorage.getItem(name)
+    createdGifs = createdGifs ? JSON.parse(createdGifs) : []
+    createdGifs.push(value)
+    localStorage.setItem(name,JSON.stringify(createdGifs))
 }
 
 function calculateTimeDuration(secs) {
-    let hr = Math.floor(secs / 3600);
-    let min = Math.floor((secs - (hr * 3600)) / 60);
-    let sec = Math.floor(secs - (hr * 3600) - (min * 60));
-    if (min < 10) {
-        min = "0" + min;
-    }
-    if (sec < 10) {
-        sec = "0" + sec;
-    }
+    let hr = Math.floor(secs / 36e2);
+    let min = Math.floor((secs - (hr * 36e2)) / 60);
+    let sec = Math.floor(secs - (hr * 36e2) - (min * 60));
+    if (min < 10) 
+        min = '0' + min
+    if (sec < 10) 
+        sec = '0' + sec
     return hr + ':' + min + ':' + sec;
 }
 
-function timer(recorder) {
+function clock(recorder) {
     let dateStarted = new Date().getTime();
-    let timer = document.getElementById('timing');
+    let time = document.getElementById('timing');
     (function looper() {
         if (!recorder) {
             return;
         }
-        timer.innerHTML = calculateTimeDuration((new Date().getTime() - dateStarted) / 1000);
-        setTimeout(looper, 1000);
+        time.innerHTML = calculateTimeDuration((new Date().getTime() - dateStarted) / 10e2);
+        setTimeout(looper, 10e2);
     })();
 }
 
