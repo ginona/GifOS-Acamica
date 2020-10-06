@@ -128,9 +128,8 @@ async function showingFavs(gif) {
 
 
 function showSearch(){
-    let input = window.matchMedia("(min-width: 800px)")
     let y = window.scrollY
-    if(input.matches && y!== 0){
+    if(y!== 0){
         document.querySelector('.header').style.boxShadow = '1px 1px 4px 0 rgba(0, 0, 0, .1)'
     }else{
         document.querySelector('.header').style.boxShadow = 'none'
