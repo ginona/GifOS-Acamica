@@ -61,8 +61,6 @@ body {
   border-top: 5px solid var(--gifos-ulback);
   font-family: 'Roboto', sans-serif;
   background-color: var(--gifos-background);
-  -webkit-box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   width: 100%;
   position: fixed;
   z-index: 3;
@@ -442,8 +440,9 @@ footer #redes {
   text-align: center;
 }
 
-footer #redes p {
+footer #redes h4 {
   color: var(--gifos-trends-sub);
+  font-weight: 300;
 }
 
 footer #redes .social-media a {

@@ -93,12 +93,14 @@ async function setTrendingText(){
 setTrendingText()
 
 function showSearch(){
-    let input = window.matchMedia("(min-width: 800px)");
-    let y = window.scrollY;
+    let input = window.matchMedia("(min-width: 800px)")
+    let y = window.scrollY
     if(input.matches && y!== 0){
-        document.getElementById("hideSearch").style.display="block";
+        document.getElementById("hideSearch").style.display="block"
+        document.querySelector('.header').style.boxShadow = '1px 1px 4px 0 rgba(0, 0, 0, .1)'
     }else{
-        document.getElementById("hideSearch").style.display="none";
+        document.getElementById("hideSearch").style.display="none"
+        document.querySelector('.header').style.boxShadow = 'none'
     }
 }
-window.addEventListener("scroll", showSearch);
+window.addEventListener("scroll", showSearch)
