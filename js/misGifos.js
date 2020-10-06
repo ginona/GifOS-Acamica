@@ -135,12 +135,12 @@ async function showingMine(gif) {
        }
 
        document.getElementById('more-results-mis-gifos').addEventListener('click', function(){
-          var hiddenPNodes = document.querySelectorAll('.noneDisplayedFavs');
-          var first3 = Array.from(hiddenPNodes).slice(0, 12);
-          first3.forEach(element => {
+          var notDisplayed = document.querySelectorAll('.noneDisplayedFavs');
+          var cutted = Array.from(notDisplayed).slice(0, 12);
+          cutted.forEach(element => {
               element.classList.remove('noneDisplayedFavs');
           });
-          if (hiddenPNodes.length <= 12) {
+          if (notDisplayed.length <= 12) {
               document.getElementById('more-results-mis-gifos').classList.add('noneDisplayedFavs');
           }
       })
