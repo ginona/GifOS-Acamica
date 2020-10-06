@@ -32,7 +32,6 @@ async function showingFavs(gif) {
     
   }
 
-
   async function searchGifsFnFav(searchResults){
     const divResult = document.getElementById('gifs-container');
     let resultHTML1 = '';

@@ -234,6 +234,10 @@ main{
                 color: var(--gifos-principal-font);
                 font-size: 14px;
                 line-height: 25px;
+                flex-wrap: wrap;
+                .noSpace{
+                    white-space:nowrap;
+                }
             }
         }
         .tr-gifs{
@@ -323,6 +327,7 @@ main{
 .hideSearch{
     display: none;
 }
+
 
 .gifs-container{
     grid-template-columns: repeat(2, 1fr);

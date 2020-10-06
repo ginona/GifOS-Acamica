@@ -296,6 +296,12 @@ main #trending .trend-text .random-trend {
   color: var(--gifos-principal-font);
   font-size: 14px;
   line-height: 25px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+main #trending .trend-text .random-trend .noSpace {
+  white-space: nowrap;
 }
 
 main #trending .tr-gifs {

@@ -81,10 +81,8 @@ async function setTrendingText(){
     trendLocation. innerHTML = ''
 
     for(let i = 0; i < 5; i++){
-        trendLocation.innerHTML += '<div class="trend-text-searched">'+trends.data[i]+','+'</div>'
+        trendLocation.innerHTML += '<div class="trend-text-searched noSpace">'+trends.data[i]+','+'</div>'
     }
-
-    //Click event and search
     let trText = document.querySelectorAll('.trend-text-searched')
     trText.forEach(div => div.addEventListener('click', e =>{
         let str = e.currentTarget.textContent.substring(0, e.currentTarget.textContent.length - 1);
