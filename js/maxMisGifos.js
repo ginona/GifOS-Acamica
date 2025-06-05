@@ -6,7 +6,7 @@ function closeModal(){
 }
 
 async function searchByIdDelete(gifId){
-    const api_url = `${process.env.GIPHY_BASE_URL}/${gifId}?api_key=${process.env.GIPHY_API_KEY}`;
+    const api_url = `${import.meta.env.VITE_GIPHY_BASE_URL}/${gifId}?api_key=${import.meta.env.VITE_GIPHY_API_KEY}`;
     try{
         const response = await fetch(api_url);
         const data = await response.json();

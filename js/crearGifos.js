@@ -167,7 +167,7 @@ function clock(recorder) {
 }
 
 async function postGifos(file){
-    const apiURL = `https://upload.giphy.com/v1/gifs?api_key=${process.env.GIPHY_API_KEY}`;
+    const apiURL = `https://upload.giphy.com/v1/gifs?api_key=${import.meta.env.VITE_GIPHY_API_KEY}`;
     try {
         const OtherParam = {
             method: "POST",

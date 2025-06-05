@@ -8,7 +8,7 @@ const slick = document.querySelectorAll('.slick');
 
 
 async function getGif(){
-    const apiURL = `${process.env.GIPHY_BASE_URL}/trending?api_key=${process.env.GIPHY_API_KEY}&limit=12&rating=g`;
+    const apiURL = `${import.meta.env.VITE_GIPHY_BASE_URL}/trending?api_key=${import.meta.env.VITE_GIPHY_API_KEY}&limit=12&rating=g`;
     const response = await fetch(apiURL);
     const data = await response.json();
     showGif(data);

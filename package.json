@@ -2,15 +2,16 @@
   "name": "gifos-acamica",
   "version": "1.0.0",
   "description": "",
-  "source": "index.html",
+  "type": "module",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.11.0"
+    "vite": "^5.1.4"
   }
 }
