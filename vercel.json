@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/giphy/:path*",
-      "destination": "https://api.giphy.com/v1/:path*?api_key=:api_key"
+      "destination": "https://api.giphy.com/v1/:path*"
     }
   ],
   "headers": [
