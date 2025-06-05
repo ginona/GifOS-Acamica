@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Archivos de build
+dist/
+.parcel-cache/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db 

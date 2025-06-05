@@ -4,7 +4,7 @@ const inputLens = document.getElementById('search-btn')
 const inputLensHeader = document.getElementById('search-btn-header')
 
 async function getGifWithInput(text, pag){
-    const apiURL = 'https://api.giphy.com/v1/gifs/search?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text+'&limit=12&offset='+pag+'&rating=g&lang=en';
+    const apiURL = `${process.env.GIPHY_BASE_URL}/search?api_key=${process.env.GIPHY_API_KEY}&q=${text}&limit=12&offset=${pag}&rating=g&lang=en`;
     const response = await fetch(apiURL);
     const data = await response.json();
     return data
@@ -65,7 +65,7 @@ async function searchGifsFn(text, pag){
 
 
 const getTextTrending = async () => {
-    const apiURL = 'https://api.giphy.com/v1/trending/searches?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
+    const apiURL = `${process.env.GIPHY_BASE_URL}/trending/searches?api_key=${process.env.GIPHY_API_KEY}`
     try{
         const response = await fetch(apiURL)
         const data = await response.json();

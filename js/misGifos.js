@@ -17,7 +17,7 @@ async function getMyGifos(){
 
     if(gifsLS){
         for (const iterator of gifsLS) {
-            let id = await searchGifById(iterator);
+            let id = await searchById(iterator);
             gifsData.push(id.data);
         }
     }else{
@@ -29,13 +29,16 @@ async function getMyGifos(){
 getMyGifos()
 
 
-async function searchGifById(gifId){
-    const api_url = 'https://api.giphy.com/v1/gifs/'+gifId+'?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs';
-
-    const response = await fetch(api_url);
-    const data = await response.json();
-    
-    return data
+async function searchById(gifId){
+    const api_url = `${process.env.GIPHY_BASE_URL}/${gifId}?api_key=${process.env.GIPHY_API_KEY}`;
+    try{
+        const response = await fetch(api_url);
+        const data = await response.json();
+        searchByIdAndLoad(data)
+        eventsMaxGif(data)
+    }catch(error){
+        console.log('Error', error);
+    }
 }
 
 async function showingMine(gif) {

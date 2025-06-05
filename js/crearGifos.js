@@ -1,4 +1,3 @@
-
 document.getElementById('starting').addEventListener('click',function(){
     startingRecord()
 })
@@ -113,7 +112,7 @@ const successCard = `
 </div>
 `
 
-async function uploadGif (file) {
+async function uploadGif(file) {
     document.getElementById('uploading').style.display = 'none'
     let vidWidth = document.getElementsByTagName('video')[0].offsetWidth;
     let vidHeight = document.getElementsByTagName('video')[0].offsetHeight;
@@ -168,7 +167,7 @@ function clock(recorder) {
 }
 
 async function postGifos(file){
-    const apiURL = `https://upload.giphy.com/v1/gifs?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs`;
+    const apiURL = `https://upload.giphy.com/v1/gifs?api_key=${process.env.GIPHY_API_KEY}`;
     try {
         const OtherParam = {
             method: "POST",
@@ -181,7 +180,6 @@ async function postGifos(file){
         console.log('Fetch Error',error);
     }
 }
-
 
 function showSearch(){
     let y = window.scrollY

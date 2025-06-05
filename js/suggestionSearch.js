@@ -1,5 +1,5 @@
-  const searchInput = document.querySelector('.search-txt');
-  const suggestionsPanel = document.getElementById('suggestions');
+const searchInput = document.querySelector('.search-txt');
+const suggestionsPanel = document.getElementById('suggestions');
   
 function fnAutoComplete(){
   searchInput.addEventListener('keyup', async (event) =>{
@@ -37,8 +37,8 @@ document.getElementById('clean-btn').addEventListener('click', function(){
   document.getElementById('clean-btn').style.display = 'none'
 })
 
- async function getAutoComplete(text){
-    const url = 'https://api.giphy.com/v1/gifs/search/tags?api_key=TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs&q='+text;
+async function getAutoComplete(text){
+    const url = `${process.env.GIPHY_BASE_URL}/search/tags?api_key=${process.env.GIPHY_API_KEY}&q=${text}`;
     try{
       const response = await fetch(url);
       const data = await response.json();
@@ -46,15 +46,15 @@ document.getElementById('clean-btn').addEventListener('click', function(){
     }catch(error){
       console.log('Error', error);
     }
-  }
+}
 
-  const searchGifoSuggested = (e) => {
-    let searchTitle = e.currentTarget.textContent
-    let inputSearch = document.getElementById('search-txt');
-    inputSearch.value = e.currentTarget.textContent;
-    let list = document.getElementById('suggestions');
-    list.innerHTML = '';
-    showingViewResults(searchTitle);
+const searchGifoSuggested = (e) => {
+  let searchTitle = e.currentTarget.textContent
+  let inputSearch = document.getElementById('search-txt');
+  inputSearch.value = e.currentTarget.textContent;
+  let list = document.getElementById('suggestions');
+  list.innerHTML = '';
+  showingViewResults(searchTitle);
 }
 
 let pag = 12 ;

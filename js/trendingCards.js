@@ -8,10 +8,7 @@ const slick = document.querySelectorAll('.slick');
 
 
 async function getGif(){
-    const API_KEY = 'TwJ1SaQHCIBd0qczJHRc3ioNpKdTxEYs'
-    const API = 'https://api.giphy.com/v1/gifs/trending'; 
-
-    const apiURL = API+'?api_key='+API_KEY+'&limit=12&rating=g';
+    const apiURL = `${process.env.GIPHY_BASE_URL}/trending?api_key=${process.env.GIPHY_API_KEY}&limit=12&rating=g`;
     const response = await fetch(apiURL);
     const data = await response.json();
     showGif(data);
