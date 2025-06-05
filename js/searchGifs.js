@@ -10,10 +10,10 @@ const inputLensHeader = document.getElementById('search-btn-header')
     return data
 } */
 
-async function getGifWithInput(text, pag) {
+export async function getGifWithInput(text, pag) {
     try {
-        const query = `q=${encodeURIComponent(text)}&limit=12&offset=${pag}&rating=g&lang=en`;
-        const response = await fetch(`/api/proxy?endpoint=search&query=${encodeURIComponent(query)}`);
+        const apiURL = `/api/giphy?endpoint=gifs/search&q=${encodeURIComponent(text)}&limit=12&offset=${pag}&rating=g&lang=en`;
+        const response = await fetch(apiURL);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -21,6 +21,7 @@ async function getGifWithInput(text, pag) {
         return data;
     } catch (error) {
         console.error('Error fetching search GIFs:', error);
+        return { data: [] }; // Return empty data structure to prevent undefined errors
     }
 }
 
@@ -47,36 +48,39 @@ inputText.addEventListener('keyup', function(e){
     showingViewResults(inputTextHeader.value)
  })
 
-async function searchGifsFn(text, pag){
+export async function searchGifsFn(text, pag){
     const divResult = document.getElementById('gifs-container');
+    if (!divResult) {
+        console.error('GIFs container not found');
+        return;
+    }
+
     let searchResults = await getGifWithInput(text, pag);
     let resultHTML1 = '';
-    searchResults.data.forEach(obj => {
-         const url = obj.images.fixed_width.url
+    
+    if (searchResults && searchResults.data && searchResults.data.length > 0) {
+        searchResults.data.forEach(obj => {
+            const url = obj.images.fixed_width.url;
+            resultHTML1 += `<div class="slick-search" id="${obj.id}">
+                <img src="${url}" alt="${obj.title}">
+                <div class="card">
+                    <div class="group-icons">
+                        <div id="${obj.id}-add" class="icons icon-heart"></div>
+                        <div id="${obj.id}-download" class="icons icon-download"></div>
+                        <div id="${obj.id}-max" class="icons icon-max"></div>
+                    </div>
+                    <div class="text-card">
+                        <div class="text-card-user">${obj.username !== '' ? obj.username : 'User'}</div>
+                        <h3 class="text-card-title">${obj.title}</h3>
+                    </div>
+                </div>
+            </div>`;
+        });
 
-         resultHTML1 += `<div class="slick-search" id="${obj.id}">
-         <img src="${url}" alt="${obj.title}">
-         <div class="card">
-         <div class="group-icons">
-             <div id="${obj.id}-add" class="icons icon-heart"></div>
-             <div id="${obj.id}-download" class="icons icon-download"></div>
-             <div id="${obj.id}-max" class="icons icon-max"></div>
-         </div>
-         <div class="text-card">
-             <div class="text-card-user">${obj.username !== '' ? obj.username : 'User' }</div>
-             <h3 class="text-card-title">${obj.title}</h3>
-        </div>
-         </div>
-     </div>`;
-     })
-
-         divResult.insertAdjacentHTML('beforeend', resultHTML1)
-
-
-         trTrending(searchResults);
-
+        divResult.insertAdjacentHTML('beforeend', resultHTML1);
+        trTrending(searchResults);
+    }
 }
-
 
 async function getTextTrending() {
     try {
@@ -88,19 +92,51 @@ async function getTextTrending() {
     }
 }
 
-async function setTrendingText(){
-    let trends = await getTextTrending();
-    let trendLocation = document.getElementById("random-trend")
-    trendLocation. innerHTML = ''
+export async function setTrendingText(){
+    try {
+        let trends = await getTextTrending();
+        let trendLocation = document.getElementById("random-trend");
+        if (!trendLocation) return;
+        
+        trendLocation.innerHTML = '';
+        
+        if (trends && trends.data && trends.data.length > 0) {
+            for(let i = 0; i < Math.min(5, trends.data.length); i++){
+                trendLocation.innerHTML += `<div class="trend-text-searched noSpace">${trends.data[i]},</div>`;
+            }
+            
+            let trText = document.querySelectorAll('.trend-text-searched');
+            trText.forEach(div => {
+                div.addEventListener('click', e => {
+                    let str = e.currentTarget.textContent.substring(0, e.currentTarget.textContent.length - 1);
+                    let giftSection = document.getElementById('trend-text');
+                    if (!giftSection) return;
 
-    for(let i = 0; i < 5; i++){
-        trendLocation.innerHTML += '<div class="trend-text-searched noSpace">'+trends.data[i]+','+'</div>'
+                    giftSection.innerHTML = `
+                        <h1 class="main-title">${str}</h1>
+                        <div id="gifs-container" class="gifs-container gifs-container-search-results">           
+                        </div><br>
+                        <div id="more-results" class="button-suggestion">
+                            Ver más
+                        </div> 
+                    `;
+
+                    // Esperar a que el DOM se actualice
+                    setTimeout(() => {
+                        searchGifsFn(str, 0);
+                        let moreResults = document.getElementById('more-results');
+                        if (moreResults) {
+                            moreResults.addEventListener("click", function(){
+                                searchMoreResults(str);
+                            });
+                        }
+                    }, 0);
+                });
+            });
+        }
+    } catch (error) {
+        console.error('Error setting trending text:', error);
     }
-    let trText = document.querySelectorAll('.trend-text-searched')
-    trText.forEach(div => div.addEventListener('click', e =>{
-        let str = e.currentTarget.textContent.substring(0, e.currentTarget.textContent.length - 1);
-        showingViewResults(str)
-    }))
 }
 
 setTrendingText()
@@ -123,3 +159,136 @@ function showSearch(){
     }
 }
 window.addEventListener("scroll", showSearch)
+
+export function trTrending(data){
+    data.data.map(function(gif){ 
+        let card = eventsTrending(gif)
+        return card;
+    }).join('');
+}
+
+export function eventsTrending(gif){
+    const toggleEvent = e => {
+        if (e.currentTarget.id == `${gif.id}-add`){
+            addToFavs(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-download`){
+            downloadFavs(gif);
+        }
+        if (e.currentTarget.id == `${gif.id}-max`){
+            searchById(gif.id);
+        }
+    };
+    const handlerEventsForEachIcon = document.querySelectorAll(".icons");
+    handlerEventsForEachIcon.forEach( btn => {
+        btn.addEventListener("click",toggleEvent)
+    })
+    const cardMaxonMobile = document.getElementById(gif.id);
+    cardMaxonMobile.addEventListener("click",function(){
+        if(isMobile()){
+            searchById(gif.id);
+        }
+    }) 
+}
+
+export function addToFavs(gif) {
+    if(document.getElementById(`${gif.id}-add`).classList.contains('icon-heart--active') == false)
+    {
+        document.getElementById(`${gif.id}-add`).classList.add('icon-heart--active')
+        addToLS('Favourites',gif)
+    }else{
+        document.getElementById(`${gif.id}-add`).classList.remove('icon-heart--active')
+        rmFavourites(gif);
+    }
+}
+
+export async function downloadFavs(gif){
+    let a = document.createElement('a');
+    let response = await fetch(`${gif.images.downsized.url}`);
+    let file = await response.blob();
+    a.download = `${gif.title}`;
+    a.href = window.URL.createObjectURL(file);
+    a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
+    a.click();
+}
+
+export function rmFavourites(gif) {
+    let data = JSON.parse(localStorage.getItem('Favourites'))
+    data.forEach((item,index) => item.id === gif.id ? data.splice(index,1): null)
+    localStorage.setItem('Favourites',JSON.stringify(data))
+}
+
+export function isMobile() {
+    return window.innerWidth <= 800;
+}
+
+export async function searchById(id) {
+    try {
+        const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
+        const data = await response.json();
+        if (data.data) {
+            const modal = document.getElementById('modal');
+            let resultHTML = '';
+            const url = data.data.images.fixed_width.url;
+
+            resultHTML += `<div class="cross" onclick="closeModal()">X</div>
+            <div class="container">
+                <div class="max-image-text">
+                    <div class="image-max">
+                        <img src="${url}" alt="${data.data.title}">
+                    </div>
+                    <div class="icon-text">
+                        <div class="max-text">
+                            <div class="text-card-user">${data.data.username !== '' ? data.data.username : 'User'}</div>
+                            <h3 class="text-card-title">${data.data.title}</h3>
+                        </div>
+                        <div class="iconos">
+                            <div id="${data.data.id}-add-max-gif" class="icons icon-heart"></div>
+                            <div id="${data.data.id}-download-max-gif" class="icons icon-download"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+            modal.innerHTML = resultHTML;
+            modal.style.display = 'block';
+
+            // Add event listeners
+            const favButton = document.getElementById(`${data.data.id}-add-max-gif`);
+            const downloadButton = document.getElementById(`${data.data.id}-download-max-gif`);
+
+            favButton.addEventListener('click', () => addFavMax(data.data));
+            downloadButton.addEventListener('click', () => downloadFavMax(data.data));
+        }
+    } catch (error) {
+        console.error('Error fetching GIF by ID:', error);
+    }
+}
+
+export function addFavMax(gif) {
+    let elementMax = document.getElementById(`${gif.id}-add-max-gif`)
+
+    if(elementMax.classList.contains('icon-heart--active') == false){
+        elementMax.classList.add('icon-heart--active')
+        addToLS('Favourites',gif)
+    }else{
+        elementMax.classList.remove('icon-heart--active')
+        rmFavourites(gif)
+    }
+}
+
+export async function downloadFavMax(gif){
+    let a = document.createElement('a');
+    let response = await fetch(`${gif.images.downsized.url}`);
+    let file = await response.blob();
+    a.download = `${gif.title}`;
+    a.href = window.URL.createObjectURL(file);
+    a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
+    a.click();
+}
+
+export function addToLS(key, value) {
+    let data = JSON.parse(localStorage.getItem(key)) || [];
+    data.push(value);
+    localStorage.setItem(key, JSON.stringify(data));
+}
