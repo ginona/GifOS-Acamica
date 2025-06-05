@@ -1,8 +1,16 @@
 {
   "rewrites": [
     {
-      "source": "/api/giphy/:path*",
-      "destination": "/api/giphy?path=:path*"
+      "source": "/api/giphy/trending/searches",
+      "destination": "https://api.giphy.com/v1/trending/searches"
+    },
+    {
+      "source": "/api/giphy/gifs/trending",
+      "destination": "https://api.giphy.com/v1/gifs/trending"
+    },
+    {
+      "source": "/api/giphy/search",
+      "destination": "https://api.giphy.com/v1/gifs/search"
     }
   ],
   "headers": [
