@@ -222,7 +222,32 @@ async function searchById(id) {
         const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
         const data = await response.json();
         if (data.data) {
-            window.location.href = `maxGif.html?id=${id}`;
+            const modal = document.getElementById('modal');
+            let resultHTML = '';
+            const url = data.data.images.fixed_width.url;
+
+            resultHTML += `<div class="cross" onclick="closeModal()">X</div>
+            <div class="container">
+                <div class="max-image-text">
+                    <div class="image-max">
+                        <img src="${url}" alt="${data.data.title}">
+                    </div>
+                    <div class="icon-text">
+                        <div class="max-text">
+                            <div class="text-card-user">${data.data.username !== '' ? data.data.username : 'User'}</div>
+                            <h3 class="text-card-title">${data.data.title}</h3>
+                        </div>
+                        <div class="iconos">
+                            <div id="${data.data.id}-add-max-gif" class="icons icon-heart"></div>
+                            <div id="${data.data.id}-download-max-gif" class="icons icon-download"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+            modal.querySelector('.modal-content').innerHTML = resultHTML;
+            modal.style.display = 'block';
+            eventsMaxGif(data);
         }
     } catch (error) {
         console.error('Error fetching GIF by ID:', error);
@@ -234,7 +259,32 @@ async function searchByIdFav(id) {
         const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
         const data = await response.json();
         if (data.data) {
-            window.location.href = `maxGifFav.html?id=${id}`;
+            const modal = document.getElementById('modalFav');
+            let resultHTML = '';
+            const url = data.data.images.fixed_width.url;
+
+            resultHTML += `<div class="cross" onclick="closeModal()">X</div>
+            <div class="container">
+                <div class="max-image-text">
+                    <div class="image-max">
+                        <img src="${url}" alt="${data.data.title}">
+                    </div>
+                    <div class="icon-text">
+                        <div class="max-text">
+                            <div class="text-card-user">${data.data.username !== '' ? data.data.username : 'User'}</div>
+                            <h3 class="text-card-title">${data.data.title}</h3>
+                        </div>
+                        <div class="iconos">
+                            <div id="${data.data.id}-add-max-gif" class="icons icon-heart--active"></div>
+                            <div id="${data.data.id}-download-max-gif" class="icons icon-download"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+            modal.querySelector('.modal-content').innerHTML = resultHTML;
+            modal.style.display = 'block';
+            eventsMaxGifFav(data);
         }
     } catch (error) {
         console.error('Error fetching GIF by ID:', error);
@@ -246,9 +296,51 @@ async function searchByIdDelete(id) {
         const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
         const data = await response.json();
         if (data.data) {
-            window.location.href = `maxMisGifos.html?id=${id}`;
+            const modal = document.getElementById('modalDelete');
+            let resultHTML = '';
+            const url = data.data.images.fixed_width.url;
+
+            resultHTML += `<div class="cross" onclick="closeModal()">X</div>
+            <div class="container">
+                <div class="max-image-text">
+                    <div class="image-max">
+                        <img src="${url}" alt="${data.data.title}">
+                    </div>
+                    <div class="icon-text">
+                        <div class="max-text">
+                            <div class="text-card-user">${data.data.username !== '' ? data.data.username : 'User'}</div>
+                            <h3 class="text-card-title">${data.data.title}</h3>
+                        </div>
+                        <div class="iconos">
+                            <div id="${data.data.id}-delete" class="icons icon-delete"></div>
+                            <div id="${data.data.id}-download-max-gif" class="icons icon-download"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+            modal.querySelector('.modal-content').innerHTML = resultHTML;
+            modal.style.display = 'block';
+            eventsMaxGifDelete(data.data);
         }
     } catch (error) {
         console.error('Error fetching GIF by ID:', error);
     }
 }
+
+function closeModal() {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.style.display = 'none';
+    });
+}
+
+// Add click event listener to close modal when clicking outside
+document.addEventListener('click', (e) => {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+});
