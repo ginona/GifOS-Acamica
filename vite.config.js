@@ -35,7 +35,15 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       outDir: 'build',
+      assetsDir: 'assets',
       sourcemap: true,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js',
+        },
+      },
     },
     define: {
       'import.meta.env.VITE_GIPHY_API_KEY': JSON.stringify(env.VITE_GIPHY_API_KEY),
