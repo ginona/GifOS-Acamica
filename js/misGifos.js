@@ -11,22 +11,20 @@ function getMineGifos(gifos) {
     }
 }
 
-async function getMyGifos(){
-    let gifsData = []
-    const gifsLS = JSON.parse(localStorage.getItem('MyGifs'))
-
-    if(gifsLS){
-        for (const iterator of gifsLS) {
-            let id = await searchById(iterator);
-            gifsData.push(id.data);
+async function getMyGifs() {
+    try {
+        const response = await fetch('/api/giphy?endpoint=gifs/my-gifs');
+        const data = await response.json();
+        if (data.data) {
+            showMyGifs(data.data);
+            setupEventListeners(data.data);
         }
-    }else{
-        gifsData = null
+    } catch (error) {
+        console.error('Error fetching my GIFs:', error);
     }
-    getMineGifos(gifsData)
 }
 
-getMyGifos()
+getMyGifs()
 
 
 async function searchById(gifId){

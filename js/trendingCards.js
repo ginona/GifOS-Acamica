@@ -8,11 +8,14 @@ const slick = document.querySelectorAll('.slick');
 
 
 async function getGif(){
-    const apiURL = `${import.meta.env.VITE_GIPHY_BASE_URL}/trending?api_key=${import.meta.env.VITE_GIPHY_API_KEY}&limit=12&rating=g`;
-    const response = await fetch(apiURL);
-    const data = await response.json();
-    showGif(data);
-    trTrending(data);
+    try {
+        const response = await fetch('/api/giphy?endpoint=gifs/trending&limit=12&rating=g');
+        const data = await response.json();
+        showGif(data);
+        trTrending(data);
+    } catch (error) {
+        console.error('Error fetching trending GIFs:', error);
+    }
 }
 
 getGif()
@@ -212,4 +215,40 @@ function trTrending(data){
     data.data.map(function(gif){ let card =  eventsTrending(gif)
         return card;
     }).join('');
+}
+
+async function searchById(id) {
+    try {
+        const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
+        const data = await response.json();
+        if (data.data) {
+            window.location.href = `maxGif.html?id=${id}`;
+        }
+    } catch (error) {
+        console.error('Error fetching GIF by ID:', error);
+    }
+}
+
+async function searchByIdFav(id) {
+    try {
+        const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
+        const data = await response.json();
+        if (data.data) {
+            window.location.href = `maxGifFav.html?id=${id}`;
+        }
+    } catch (error) {
+        console.error('Error fetching GIF by ID:', error);
+    }
+}
+
+async function searchByIdDelete(id) {
+    try {
+        const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
+        const data = await response.json();
+        if (data.data) {
+            window.location.href = `maxMisGifos.html?id=${id}`;
+        }
+    } catch (error) {
+        console.error('Error fetching GIF by ID:', error);
+    }
 }

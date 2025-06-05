@@ -112,24 +112,20 @@ const successCard = `
 </div>
 `
 
-async function uploadGif(file) {
-    document.getElementById('uploading').style.display = 'none'
-    let vidWidth = document.getElementsByTagName('video')[0].offsetWidth;
-    let vidHeight = document.getElementsByTagName('video')[0].offsetHeight;
-    let containerVideo = document.getElementById('container-video')
-    let cardLoad = document.createElement('div')
-    cardLoad.id = 'video-card-loading'
-    cardLoad.style.width = `${vidWidth}px`
-    cardLoad.style.height = `${vidHeight}px`
-    cardLoad.className = 'video-card'
-    cardLoad.innerHTML = `<img src="/img/loader.svg" alt="loader"><br>
-                          <h3>Estamos subiendo tu GIFO</h3>`
-    containerVideo.appendChild(cardLoad)
-    let postGif = await postGifos(file);
-    addingLS('MyGifs',postGif.data.id)
-    cardLoad.innerHTML = `<img src="/img/ok.svg" alt="loader"><br>
-                          <h3>GIFO subido con éxito</h3>`
-                          console.log("Uploaded")
+async function uploadGif(formData) {
+    try {
+        const response = await fetch('/api/giphy?endpoint=gifs/upload', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        if (data.data) {
+            handleUploadSuccess(data.data);
+        }
+    } catch (error) {
+        console.error('Error uploading GIF:', error);
+        handleUploadError();
+    }
 }
 
 document.getElementById('repeat').addEventListener('click', function(){

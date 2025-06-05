@@ -5,6 +5,18 @@ function closeModal(){
     modal.style.display = 'none';
 }
 
+async function getGifById(id) {
+    try {
+        const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
+        const data = await response.json();
+        if (data.data) {
+            showGifDetails(data.data);
+        }
+    } catch (error) {
+        console.error('Error fetching GIF by ID:', error);
+    }
+}
+
 async function searchByIdDelete(gifId){
     const api_url = `${import.meta.env.VITE_GIPHY_BASE_URL}/${gifId}?api_key=${import.meta.env.VITE_GIPHY_API_KEY}`;
     try{

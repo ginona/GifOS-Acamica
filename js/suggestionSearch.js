@@ -3,7 +3,7 @@ const suggestionsPanel = document.getElementById('suggestions');
   
 function fnAutoComplete(){
   searchInput.addEventListener('keyup', async (event) =>{
-      let sug = await getAutoComplete(searchInput.value);
+      let sug = await getSuggestions(searchInput.value);
       document.getElementById('search-btn').style.display = 'none'
       document.getElementById('clean-btn').style.display = 'block'
       if(searchInput.value == ''){
@@ -13,12 +13,12 @@ function fnAutoComplete(){
       suggestionsPanel.style.borderTop = "1px solid rgba(156, 175, 195 ,.5)";
       const view = `
         <ul class="suggestions">
-            ${sug.data.map(item => `
+            ${sug.map(item => `
                 <li class="option-list"><i class="fa fa-search"></i>${item.name}</li>
             `).join('')}
         </ul>
         `;
-        if(sug.data.length !== 0){
+        if(sug.length !== 0){
           suggestionsPanel.innerHTML = view
         }else{
           suggestionsPanel.innerHTML = ''
@@ -37,14 +37,15 @@ document.getElementById('clean-btn').addEventListener('click', function(){
   document.getElementById('clean-btn').style.display = 'none'
 })
 
-async function getAutoComplete(text){
-    const url = `/api/giphy?endpoint=search/tags&q=${text}`;
-    try{
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
-    }catch(error){
-      console.log('Error', error);
+async function getSuggestions(text) {
+    try {
+        const response = await fetch(`/api/giphy?endpoint=search/tags&q=${text}`);
+        const data = await response.json();
+        if (data.data) {
+            showSuggestions(data.data);
+        }
+    } catch (error) {
+        console.error('Error fetching suggestions:', error);
     }
 }
 

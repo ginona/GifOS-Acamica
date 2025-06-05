@@ -3,11 +3,25 @@ const inputTextHeader = document.getElementById('search-txt-header')
 const inputLens = document.getElementById('search-btn')
 const inputLensHeader = document.getElementById('search-btn-header')
 
-async function getGifWithInput(text, pag){
+/* async function getGifWithInput(text, pag){
     const apiURL = `/api/giphy?endpoint=search&q=${text}&limit=12&offset=${pag}&rating=g&lang=en`;
     const response = await fetch(apiURL);
     const data = await response.json();
     return data
+} */
+
+async function getGifWithInput(text, pag) {
+    try {
+        const query = `q=${encodeURIComponent(text)}&limit=12&offset=${pag}&rating=g&lang=en`;
+        const response = await fetch(`/api/proxy?endpoint=search&query=${encodeURIComponent(query)}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching search GIFs:', error);
+    }
 }
 
 inputText.addEventListener('keyup', function(e){ 
@@ -64,14 +78,13 @@ async function searchGifsFn(text, pag){
 }
 
 
-const getTextTrending = async () => {
-    const apiURL = `/api/giphy?endpoint=trending/searches`
-    try{
-        const response = await fetch(apiURL)
+async function getTextTrending() {
+    try {
+        const response = await fetch('/api/giphy?endpoint=trending/searches');
         const data = await response.json();
         return data;
-    }catch (error) {
-        console.log('Fetch Error',error);
+    } catch (error) {
+        console.error('Error fetching text GIFs:', error);
     }
 }
 
