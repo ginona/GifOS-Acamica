@@ -38,7 +38,7 @@ document.getElementById('clean-btn').addEventListener('click', function(){
 })
 
 async function getAutoComplete(text){
-    const url = `${process.env.GIPHY_BASE_URL}/search/tags?api_key=${process.env.GIPHY_API_KEY}&q=${text}`;
+    const url = `/api/giphy?endpoint=search/tags&q=${text}`;
     try{
       const response = await fetch(url);
       const data = await response.json();
