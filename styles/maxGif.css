@@ -82,24 +82,14 @@
   cursor: pointer;
   z-index: 6000;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 22px;
   color: var(--gifos-principal-font);
   opacity: 0.9;
   padding: 10px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
 }
 
 .cross:hover {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.2);
-  transform: scale(1.1);
 }
 
 @media (min-width: 768px) {
@@ -109,9 +99,6 @@
   .cross {
     right: 40px;
     top: 40px;
-    font-size: 28px;
-    width: 50px;
-    height: 50px;
   }
 }
 /*# sourceMappingURL=maxGif.css.map */

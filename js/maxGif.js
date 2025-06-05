@@ -18,12 +18,11 @@ async function getGifById(id) {
 }
 
 async function searchById(gifId){
-    const api_url = `${import.meta.env.VITE_GIPHY_BASE_URL}/${gifId}?api_key=${import.meta.env.VITE_GIPHY_API_KEY}`;
     try{
-        const response = await fetch(api_url);
+        const response = await fetch(`/api/giphy?endpoint=gifs/${gifId}`);
         const data = await response.json();
         searchByIdAndLoad(data)
-        eventsMaxGif(data)
+        eventsMaxGif(data.data)
     }catch(error){
         console.log('Error', error);
     }
@@ -45,8 +44,8 @@ async function searchByIdAndLoad(gifWithId){
                         <h3 class="text-card-title">${gifWithId.data.title}</h3>
                     </div>
                     <div class="iconos">
-                    <div id="${gifWithId.data.id}-add-max-gif" class="icons icon-heart"></div>
-                    <div id="${gifWithId.data.id}-download-max-gif" class="icons icon-download"></div>
+                        <div id="${gifWithId.data.id}-add-max-gif" class="icons icon-heart"></div>
+                        <div id="${gifWithId.data.id}-download-max-gif" class="icons icon-download"></div>
                     </div>
                 </div>
             </div>
@@ -64,7 +63,6 @@ function addToLSMaxGif(name,value) {
     localStorage.setItem(name,JSON.stringify(existing)); 
 }
 
-
 function addFavMax(gif) {
     let elementMax = document.getElementById(`${gif.id}-add-max-gif`)
 
@@ -75,30 +73,30 @@ function addFavMax(gif) {
         elementMax.classList.remove('icon-heart--active')
         rmFavMax(gif)
     }
-
 }
 
 async function downloadFavMax(gif){
     let a = document.createElement('a');
-    let response = await fetch(`${gif.data.images.downsized.url}`);
+    let response = await fetch(`${gif.images.downsized.url}`);
     let file = await response.blob();
-    a.download = `${gif.data.title}`;
+    a.download = `${gif.title}`;
     a.href = window.URL.createObjectURL(file);
     a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
     a.click();
 }
+
 function rmFavMax(gif) {
     let data = JSON.parse(localStorage.getItem('Favourites'))
-    data.forEach((ítem,index) => ítem.id === gif.id ? data.splice(index,1): null)
+    data.forEach((item,index) => item.id === gif.id ? data.splice(index,1): null)
     localStorage.setItem('Favourites',JSON.stringify(data))
 }
 
 function eventsMaxGif(gif){
     const toggleEvent = e => {
-        if (e.currentTarget.id == `${gif.data.id}-add-max-gif`){
-            addFavMax(gif.data);
+        if (e.currentTarget.id == `${gif.id}-add-max-gif`){
+            addFavMax(gif);
         }
-        if (e.currentTarget.id == `${gif.data.id}-download-max-gif`){
+        if (e.currentTarget.id == `${gif.id}-download-max-gif`){
             downloadFavMax(gif)
         }
     };

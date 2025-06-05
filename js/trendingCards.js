@@ -245,13 +245,41 @@ async function searchById(id) {
                 </div>
             </div>`;
 
-            modal.querySelector('.modal-content').innerHTML = resultHTML;
+            modal.innerHTML = resultHTML;
             modal.style.display = 'block';
-            eventsMaxGif(data);
+
+            // Add event listeners
+            const favButton = document.getElementById(`${data.data.id}-add-max-gif`);
+            const downloadButton = document.getElementById(`${data.data.id}-download-max-gif`);
+
+            favButton.addEventListener('click', () => addFavMax(data.data));
+            downloadButton.addEventListener('click', () => downloadFavMax(data.data));
         }
     } catch (error) {
         console.error('Error fetching GIF by ID:', error);
     }
+}
+
+function addFavMax(gif) {
+    let elementMax = document.getElementById(`${gif.id}-add-max-gif`)
+
+    if(elementMax.classList.contains('icon-heart--active') == false){
+        elementMax.classList.add('icon-heart--active')
+        addToLS('Favourites',gif)
+    }else{
+        elementMax.classList.remove('icon-heart--active')
+        rmFavourites(gif)
+    }
+}
+
+async function downloadFavMax(gif){
+    let a = document.createElement('a');
+    let response = await fetch(`${gif.images.downsized.url}`);
+    let file = await response.blob();
+    a.download = `${gif.title}`;
+    a.href = window.URL.createObjectURL(file);
+    a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
+    a.click();
 }
 
 async function searchByIdFav(id) {

@@ -45,8 +45,8 @@ async function searchByIdAndLoadFav(gifWithId){
                         <h3 class="text-card-title">${gifWithId.data.title}</h3>
                     </div>
                     <div class="iconos">
-                    <div id="${gifWithId.data.id}-add-max-gif" class="icons icon-heart--active"></div>
-                    <div id="${gifWithId.data.id}-download-max-gif" class="icons icon-download"></div>
+                        <div id="${gifWithId.data.id}-add-max-gif" class="icons icon-heart--active"><i class="icon-heart"></i></div>
+                        <div id="${gifWithId.data.id}-download-max-gif" class="icons icon-download"><i class="icon-download"></i></div>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,6 @@ function addToLSMaxGifFav(name,value) {
     existing.push(value);
     localStorage.setItem(name,JSON.stringify(existing)); 
 }
-
 
 function addFavMaxFav(gif) {
     let elementMax = document.getElementById(`${gif.id}-add-max-gif`)
@@ -86,9 +85,10 @@ async function downloadFavMaxFav(gif){
     a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
     a.click();
 }
+
 function rmFavMaxFav(gif) {
     let data = JSON.parse(localStorage.getItem('Favourites'))
-    data.forEach((ítem,index) => ítem.id === gif.id ? data.splice(index,1): null)
+    data.forEach((item,index) => item.id === gif.id ? data.splice(index,1): null)
     localStorage.setItem('Favourites',JSON.stringify(data))
 }
 
