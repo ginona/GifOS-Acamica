@@ -34,8 +34,6 @@ function catchingSteps(value){
         case 5:
             document.getElementById('step-2').classList.remove('step-selected')
             document.getElementById('step-3').classList.add('step-selected')
-            // document.getElementById('repeat').style.display = 'none'
-            
             break;
         case 6:
             document.getElementById('uploading').style.display = 'none'
@@ -51,8 +49,8 @@ function startingRecord(){
     catchingSteps(1)
     let videoRecording = document.createElement('video')
     let containerVideo = document.getElementById('container-video')
-    containerVideo.innerHTML = `<h1 id="askVideoT">¿Nos das acceso <br>a tu cámara?</h1>
-    <p id="askVideoP">El acceso a tu camara será válido sólo <br>por el tiempo en el que estés creando el GIFO.</p>`
+    containerVideo.innerHTML = `<h1 id="askVideoT">Do you allow us <br>to access your camera?</h1>
+    <p id="askVideoP">Camera access will only be valid <br>while you're creating the GIFO.</p>`
     containerVideo.appendChild(videoRecording)
     navigator.mediaDevices.getUserMedia({
         audio: false,
@@ -104,11 +102,10 @@ function startingRecord(){
     })
 }
 
-
 const successCard = `
 <div id="video-card-success" class="video-card hideBtn">
 <img src="/img/loader.svg" alt="loader">
-<h3>GIFO subido con éxito</h3>
+<h3>GIFO uploaded successfully</h3>
 </div>
 `
 

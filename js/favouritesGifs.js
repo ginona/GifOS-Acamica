@@ -2,39 +2,34 @@ import { rmFavourites, downloadFavs, searchByIdFav } from './trendingCards.js';
 
 const noResultContainer = document.getElementById('error-result-fav')
 
-function getFavouriteCards() {
-    const data = JSON.parse(localStorage.getItem('Favourites'))
-
-    if(data == null || data.length < 1){
-        noResultContainer.innerHTML = '<div class="image-no-fav"><img src="./img/icon-fav-sin-contenido.svg" alt="no-content-favs"></div><br><br><p>¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!</p>'
-    }
-     else{
-        data.map(function(gif) {
-            showingFavs(data)
+function getFavouriteCards(gifos) {
+    if(gifos == null || gifos.length < 1){
+        noResultContainer.innerHTML = '<div class="image-no-fav"><img src="./img/icon-fav-sin-contenido.svg" alt="no-content-favs"></div><br><br><p>Save your first GIFO!</p>'
+    }else{
+        gifos.map(function(gif){
+            showingFav(gifos)
         })
-     }   
-    
+    }
 }
-getFavouriteCards()
 
-
-async function showingFavs(gif) {
+async function showingFav(gif) {
     let giftSection = document.getElementById('gifFav');
     const divResultado = document.getElementById('search-resultados');
     const viewGifs = `
         <div id="gifs-container" class="gifs-container gifs-container-search-results">           
         </div><br>
             <div id="more-results-favs" class="button-suggestion">
-            Ver más
+            See more
         </div> 
     `;
 
-        giftSection.innerHTML = viewGifs
-        searchGifsFnFav(gif)
-    
-  }
+    giftSection.innerHTML = viewGifs
+    searchGifsFnFav(gif)
+}
 
-  async function searchGifsFnFav(searchResults){
+getFavouriteCards()
+
+async function searchGifsFnFav(searchResults){
     const divResult = document.getElementById('gifs-container');
     let resultHTML1 = '';
     let bandera = 0
@@ -141,7 +136,6 @@ async function showingFavs(gif) {
         });
     }
 }
-
 
 function showSearch(){
     let y = window.scrollY

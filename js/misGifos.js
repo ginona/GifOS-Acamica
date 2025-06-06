@@ -3,7 +3,7 @@ const noResultContainer = document.getElementById('error-result-mine-gif')
 function getMineGifos(gifos) {
      
     if(gifos == null || gifos.length < 1){
-        noResultContainer.innerHTML = '<div class="image-no-fav"><img src="./img/icon-fav-sin-contenido.svg" alt="no-content-favs"></div><br><br><p>¡Anímate a crear tu primer GIFO!</p>'
+        noResultContainer.innerHTML = '<div class="image-no-fav"><img src="./img/icon-fav-sin-contenido.svg" alt="no-content-favs"></div><br><br><p>Create your first GIFO!</p>'
     }else{
         gifos.map(function(gif){
             showingMine(gifos)
@@ -45,7 +45,7 @@ async function showingMine(gif) {
         <div id="gifs-container" class="gifs-container gifs-container-search-results">           
         </div><br>
             <div id="more-results-mis-gifos" class="button-suggestion">
-            Ver más
+            See more
         </div> 
     `;
 
