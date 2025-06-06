@@ -1,3 +1,5 @@
+import { rmFavourites, downloadFavs, searchByIdFav } from './trendingCards.js';
+
 const noResultContainer = document.getElementById('error-result-fav')
 
 function getFavouriteCards() {
@@ -39,15 +41,13 @@ async function showingFavs(gif) {
     if(searchResults.length<=12)
     {
         for(let i = 0; i<searchResults.length; i++){
-        
-
             const url = searchResults[i].images.fixed_width.url
     
             resultHTML1 += `<div class="slick-search" id="${searchResults[i].id}">
             <img src="${url}" alt="${searchResults[i].title}">
             <div class="card">
             <div class="group-icons">
-                <div id="${searchResults[i].id}-add" class="icons-fav icon-heart--active"></div>
+                <div id="${searchResults[i].id}-add" class="icons-fav icon-delete"></div>
                 <div id="${searchResults[i].id}-download" class="icons-fav icon-download"></div>
                 <div id="${searchResults[i].id}-max" class="icons-fav icon-max"></div>
             </div>
@@ -57,20 +57,17 @@ async function showingFavs(gif) {
            </div>
             </div>
         </div>`;
-            
         }
         document.getElementById('more-results-favs').classList.add('noneDisplayedFavs');
     }else{
         for(let i = 0; i<12; i++){
-        
-
             const url = searchResults[i].images.fixed_width.url
     
             resultHTML1 += `<div class="slick-search" id="${searchResults[i].id}">
             <img src="${url}" alt="${searchResults[i].title}">
             <div class="card">
             <div class="group-icons">
-                <div id="${searchResults[i].id}-add" class="icons-fav icon-heart--active"></div>
+                <div id="${searchResults[i].id}-add" class="icons-fav icon-delete"></div>
                 <div id="${searchResults[i].id}-download" class="icons-fav icon-download"></div>
                 <div id="${searchResults[i].id}-max" class="icons-fav icon-max"></div>
             </div>
@@ -80,7 +77,6 @@ async function showingFavs(gif) {
            </div>
             </div>
         </div>`;
-            
         }
 
         for(let i = 12; i<searchResults.length; i++){
@@ -90,7 +86,7 @@ async function showingFavs(gif) {
             <img src="${url}" alt="${searchResults[i].title}">
             <div class="card">
             <div class="group-icons">
-                <div id="${searchResults[i].id}-add" class="icons-fav icon-heart--active"></div>
+                <div id="${searchResults[i].id}-add" class="icons-fav icon-delete"></div>
                 <div id="${searchResults[i].id}-download" class="icons-fav icon-download"></div>
                 <div id="${searchResults[i].id}-max" class="icons-fav icon-max"></div>
             </div>
@@ -100,30 +96,50 @@ async function showingFavs(gif) {
            </div>
             </div>
         </div>`;
-            
         }
     }
 
-        
+    divResult.innerHTML = resultHTML1;
 
-         divResult.insertAdjacentHTML('beforeend', resultHTML1)
+    for(let j = 0; j<searchResults.length; j++) {
+        const gif = searchResults[j];
+        const deleteBtn = document.getElementById(`${gif.id}-add`);
+        const downloadBtn = document.getElementById(`${gif.id}-download`);
+        const maxBtn = document.getElementById(`${gif.id}-max`);
 
-         for(let j = 0; j<searchResults.length; j++)
-         {
-            eventsTrendingFav(searchResults[j])
-         }
+        if(deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                rmFavourites(gif);
+                location.reload();
+            });
+        }
 
-         
-        document.getElementById('more-results-favs').addEventListener('click', function(){
+        if(downloadBtn) {
+            downloadBtn.addEventListener('click', () => {
+                downloadFavs(gif);
+            });
+        }
+
+        if(maxBtn) {
+            maxBtn.addEventListener('click', () => {
+                searchByIdFav(gif.id);
+            });
+        }
+    }
+
+    const moreResultsBtn = document.getElementById('more-results-favs');
+    if(moreResultsBtn) {
+        moreResultsBtn.addEventListener('click', function(){
             var notDisplayed = document.querySelectorAll('.noneDisplayedFavs');
             var cutted = Array.from(notDisplayed).slice(0, 12);
             cutted.forEach(element => {
                 element.classList.remove('noneDisplayedFavs');
             });
             if (notDisplayed.length <= 12) {
-                document.getElementById('more-results-favs').classList.add('noneDisplayedFavs')
+                moreResultsBtn.classList.add('noneDisplayedFavs');
             }
-        })
+        });
+    }
 }
 
 

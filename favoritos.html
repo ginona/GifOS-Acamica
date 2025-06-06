@@ -103,5 +103,13 @@
     <script type="module" src="js/favouritesGifs.js"></script>
     <script type="module" src="js/maxGifFav.js"></script>
     <script type="module" src="js/maxGif.js"></script>
+    <script>
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+    </script>
 </body>
 </html>

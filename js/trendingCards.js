@@ -92,7 +92,7 @@ function addToFavs(gif) {
     }
 }
 
-async function downloadFavs(gif){
+export async function downloadFavs(gif){
     let a = document.createElement('a');
     let response = await fetch(`${gif.images.downsized.url}`);
     let file = await response.blob();
@@ -102,12 +102,13 @@ async function downloadFavs(gif){
     a.click();
 }
 
-function rmFavourites(gif) {
+export function rmFavourites(gif) {
     let data = JSON.parse(localStorage.getItem('Favourites'))
     
     data.forEach((item,index) => item.id === gif.id ? data.splice(index,1): null)
     localStorage.setItem('Favourites',JSON.stringify(data))
 }
+
 function rmMisGifos(gif) {
     let data = JSON.parse(localStorage.getItem('MyGifs'))
     data.forEach((item,index) => item === gif.id ? data.splice(index,1): null)
@@ -142,7 +143,8 @@ function eventsTrending(gif){
 function eventsTrendingFav(gif){
     const toggleEvent = e => {
         if (e.currentTarget.id == `${gif.id}-add`){
-            addToFavsFav(gif);
+            rmFavourites(gif);
+            location.reload();
         }
         if (e.currentTarget.id == `${gif.id}-download`){
             downloadFavs(gif);
@@ -282,7 +284,7 @@ async function downloadFavMax(gif){
     a.click();
 }
 
-async function searchByIdFav(id) {
+export async function searchByIdFav(id) {
     try {
         const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
         const data = await response.json();
@@ -310,7 +312,7 @@ async function searchByIdFav(id) {
                 </div>
             </div>`;
 
-            modal.querySelector('.modal-content').innerHTML = resultHTML;
+            modal.innerHTML = resultHTML;
             modal.style.display = 'block';
             eventsMaxGifFav(data);
         }
