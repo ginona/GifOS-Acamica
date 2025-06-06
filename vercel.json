@@ -23,7 +23,7 @@
   "rewrites": [
     {
       "source": "/api/giphy",
-      "destination": "https://api.giphy.com/v1/:path*"
+      "destination": "/api/giphy.js"
     }
   ],
   "headers": [

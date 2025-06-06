@@ -8,6 +8,7 @@ export default async function handler(req, res) {
   console.log('API Key length:', apiKey ? apiKey.length : 0);
   console.log('Environment:', process.env.NODE_ENV);
   console.log('Request method:', req.method);
+  console.log('Query params:', req.query);
 
   if (!apiKey) {
     console.error('API key is missing');
@@ -43,8 +44,7 @@ export default async function handler(req, res) {
       giphyUrl.searchParams.set('api_key', apiKey);
       
       // Add all other query parameters
-      const queryParams = new URLSearchParams(req.url.split('?')[1] || '');
-      queryParams.forEach((value, key) => {
+      Object.entries(req.query).forEach(([key, value]) => {
         if (key !== 'endpoint') {
           giphyUrl.searchParams.append(key, value);
         }
