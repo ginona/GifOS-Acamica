@@ -1,12 +1,13 @@
 export default async function handler(req, res) {
-  const { path } = req.query;
+  const { endpoint } = req.query;
   const apiKey = process.env.VITE_GIPHY_API_KEY;
 
   // Debug information
-  console.log('Path:', path);
+  console.log('Endpoint:', endpoint);
   console.log('API Key exists:', !!apiKey);
   console.log('API Key length:', apiKey ? apiKey.length : 0);
   console.log('Environment:', process.env.NODE_ENV);
+  console.log('Request method:', req.method);
 
   if (!apiKey) {
     console.error('API key is missing');
@@ -16,37 +17,45 @@ export default async function handler(req, res) {
     });
   }
 
-  if (!path) {
-    console.error('Path parameter is missing');
+  if (!endpoint) {
+    console.error('Endpoint parameter is missing');
     return res.status(400).json({ 
-      error: 'Path parameter is required',
-      details: 'Please provide a valid Giphy API path'
+      error: 'Endpoint parameter is required',
+      details: 'Please provide a valid Giphy API endpoint'
     });
   }
 
   try {
-    // Get query parameters from the original request
-    const queryParams = new URLSearchParams(req.url.split('?')[1] || '');
-    
-    // Build the Giphy API URL
-    const giphyUrl = new URL(`https://api.giphy.com/v1/${path}`);
-    
-    // Add API key first
-    giphyUrl.searchParams.set('api_key', apiKey);
-    
-    // Add all other query parameters
-    queryParams.forEach((value, key) => {
-      if (key !== 'path') {
-        giphyUrl.searchParams.append(key, value);
-      }
-    });
+    let giphyUrl;
+    let options = {};
+
+    if (req.method === 'POST') {
+      // For POST requests, use the upload endpoint
+      giphyUrl = new URL('https://upload.giphy.com/v1/gifs');
+      giphyUrl.searchParams.set('api_key', apiKey);
+      options = {
+        method: 'POST',
+        body: req.body
+      };
+    } else {
+      // For GET requests, use the regular API endpoint
+      giphyUrl = new URL(`https://api.giphy.com/v1/${endpoint}`);
+      giphyUrl.searchParams.set('api_key', apiKey);
+      
+      // Add all other query parameters
+      const queryParams = new URLSearchParams(req.url.split('?')[1] || '');
+      queryParams.forEach((value, key) => {
+        if (key !== 'endpoint') {
+          giphyUrl.searchParams.append(key, value);
+        }
+      });
+    }
 
     // Debug the final URL (without exposing the API key)
     console.log('Request URL:', giphyUrl.toString().replace(apiKey, 'REDACTED'));
-    console.log('Request method:', req.method);
     console.log('Request headers:', JSON.stringify(req.headers));
 
-    const response = await fetch(giphyUrl.toString());
+    const response = await fetch(giphyUrl.toString(), options);
     const data = await response.json();
 
     // Debug the response

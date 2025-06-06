@@ -28,9 +28,8 @@ getMyGifs()
 
 
 async function searchById(gifId){
-    const api_url = `${import.meta.env.VITE_GIPHY_BASE_URL}/${gifId}?api_key=${import.meta.env.VITE_GIPHY_API_KEY}`;
     try{
-        const response = await fetch(api_url);
+        const response = await fetch(`/api/giphy?endpoint=gifs/${gifId}`);
         const data = await response.json();
         searchByIdAndLoad(data)
         eventsMaxGif(data)

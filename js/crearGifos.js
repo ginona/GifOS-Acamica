@@ -163,17 +163,15 @@ function clock(recorder) {
 }
 
 async function postGifos(file){
-    const apiURL = `https://upload.giphy.com/v1/gifs?api_key=${import.meta.env.VITE_GIPHY_API_KEY}`;
     try {
-        const OtherParam = {
+        const response = await fetch('/api/giphy?endpoint=gifs', {
             method: "POST",
             body: file
-        }
-        const response = await fetch(apiURL,OtherParam);
+        });
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log('Fetch Error',error);
+        console.log('Fetch Error', error);
     }
 }
 
