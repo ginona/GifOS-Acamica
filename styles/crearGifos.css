@@ -299,4 +299,48 @@
   background-color: var(--gifos-principal-font);
   color: var(--gifos-background);
 }
+
+.camera-request {
+    text-align: center;
+    padding: 20px;
+}
+
+.camera-status {
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gifos-principal-font);
+}
+
+.camera-status p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.camera-error {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.camera-error h1 {
+    color: #ff0000;
+    margin-bottom: 15px;
+}
+
+.camera-error p {
+    color: var(--gifos-principal-font);
+    margin-bottom: 20px;
+}
+
+.camera-error .button-cgf {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+}
+
+.camera-error .button-cgf:hover {
+    background-color: #cc0000;
+}
 /*# sourceMappingURL=crearGifos.css.map */

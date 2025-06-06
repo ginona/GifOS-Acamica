@@ -49,9 +49,22 @@ function startingRecord(){
     catchingSteps(1)
     let videoRecording = document.createElement('video')
     let containerVideo = document.getElementById('container-video')
-    containerVideo.innerHTML = `<h1 id="askVideoT">Do you allow us <br>to access your camera?</h1>
-    <p id="askVideoP">Camera access will only be valid <br>while you're creating the GIFO.</p>`
+    
+    // Mostrar mensaje de solicitud de cámara
+    containerVideo.innerHTML = `
+        <div class="camera-request">
+            <h1 id="askVideoT">Do you allow us <br>to access your camera?</h1>
+            <p id="askVideoP">Camera access will only be valid <br>while you're creating the GIF.</p>
+            <div class="camera-status" id="camera-status"></div>
+        </div>
+    `
     containerVideo.appendChild(videoRecording)
+
+    // Actualizar estado de la cámara
+    const cameraStatus = document.getElementById('camera-status')
+    cameraStatus.innerHTML = '<p>Requesting camera access...</p>'
+
+    // Solicitar acceso a la cámara
     navigator.mediaDevices.getUserMedia({
         audio: false,
         video: {
@@ -59,19 +72,23 @@ function startingRecord(){
             width: {max: 500}
         }
     }).then(async function(stream){
+        // Cámara accedida exitosamente
+        cameraStatus.innerHTML = '<p style="color: green;">Camera access granted!</p>'
         videoRecording.srcObject = stream
         videoRecording.play()
         catchingSteps(2)
+        
         const recorder = RecordRTC(stream, {
             type: 'gif',
             frameRate: 1,
             quality: 10,
             width: 360,
-            hidden: 240,
+            height: 240,
             onGifRecordingStarted: function(){
-                console.log('started')
+                console.log('Recording started')
             },
         })
+
         let recording = document.getElementById('recording')
         recording.addEventListener('click', function(){
             videoRecording.play()
@@ -79,50 +96,111 @@ function startingRecord(){
             catchingSteps(3)
             clock(true)
         })
+
         let finishRecord = document.getElementById('finishing')
         let blob
         finishRecord.addEventListener('click', function(){
             setTimeout(() => {
                 recorder.stopRecording(function(){
                     blob = recorder.getBlob()
+                    // Stop all tracks to release camera
+                    stream.getTracks().forEach(track => track.stop())
                 })
                 videoRecording.pause()
                 catchingSteps(4)
                 clock(false)
             }, 1000);
         })
+
         let uploadRecord = document.getElementById('uploading')
         uploadRecord.addEventListener('click', async function(){
             catchingSteps(5)
             let form = new FormData();
             form.append('file', blob, 'myGif.gif')
-
             uploadGif(form)
         })
+    }).catch(function(error) {
+        console.error('Error accessing camera:', error);
+        // Mostrar mensaje de error específico según el tipo de error
+        let errorMessage = 'Please make sure you have granted camera permissions and try again.'
+        if (error.name === 'NotAllowedError') {
+            errorMessage = 'Camera access was denied. Please allow camera access and try again.'
+        } else if (error.name === 'NotFoundError') {
+            errorMessage = 'No camera found. Please connect a camera and try again.'
+        } else if (error.name === 'NotReadableError') {
+            errorMessage = 'Camera is in use by another application. Please close other applications using the camera and try again.'
+        }
+        
+        containerVideo.innerHTML = `
+            <div class="camera-error">
+                <h1>Camera Access Error</h1>
+                <p>${errorMessage}</p>
+                <button onclick="window.location.reload()" class="button-cgf">Try Again</button>
+            </div>
+        `;
     })
 }
 
 const successCard = `
-<div id="video-card-success" class="video-card hideBtn">
-<img src="/img/loader.svg" alt="loader">
-<h3>GIFO uploaded successfully</h3>
+<div id="video-card-success" class="video-card">
+    <img src="/img/loader.svg" alt="loader">
+    <h3>GIF uploaded successfully!</h3>
+</div>
+`
+
+const errorCard = `
+<div id="video-card-error" class="video-card">
+    <img src="/img/icon-fav-sin-contenido.svg" alt="error">
+    <h3>Error uploading GIF. Please try again.</h3>
 </div>
 `
 
 async function uploadGif(formData) {
+    const containerVideo = document.getElementById('container-video');
+    containerVideo.innerHTML = successCard;
+    
     try {
         const response = await fetch('/api/giphy?endpoint=gifs/upload', {
             method: 'POST',
             body: formData
         });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
         const data = await response.json();
         if (data.data) {
             handleUploadSuccess(data.data);
+        } else {
+            throw new Error('No data received from server');
         }
     } catch (error) {
         console.error('Error uploading GIF:', error);
-        handleUploadError();
+        containerVideo.innerHTML = errorCard;
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
     }
+}
+
+function handleUploadSuccess(data) {
+    const containerVideo = document.getElementById('container-video');
+    containerVideo.innerHTML = `
+        <div class="video-card">
+            <img src="${data.images.fixed_width.url}" alt="uploaded gif">
+            <h3>GIF uploaded successfully!</h3>
+            <p>Your GIF has been saved to My GIFs</p>
+        </div>
+    `;
+    
+    // Save to local storage
+    addingLS('myGifos', data);
+    
+    // Redirect after 3 seconds
+    setTimeout(() => {
+        window.location.href = './misGifos.html';
+    }, 3000);
 }
 
 document.getElementById('repeat').addEventListener('click', function(){
@@ -182,7 +260,7 @@ function showSearch(){
 }
 window.addEventListener("scroll", showSearch)
 
-export async function getGifWithInput(text, pag) {
+async function getGifWithInput(text, pag) {
     try {
         const apiURL = `/api/giphy?endpoint=gifs/search&q=${encodeURIComponent(text)}&limit=12&offset=${pag}&rating=g&lang=en`;
         const response = await fetch(apiURL);
@@ -197,7 +275,7 @@ export async function getGifWithInput(text, pag) {
     }
 }
 
-export async function searchById(id) {
+async function searchById(id) {
     try {
         const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
         const data = await response.json();
