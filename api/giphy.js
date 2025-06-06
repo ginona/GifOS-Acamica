@@ -2,14 +2,6 @@ export default async function handler(req, res) {
   const { endpoint } = req.query;
   const apiKey = process.env.VITE_GIPHY_API_KEY;
 
-  // Debug information
-  console.log('Endpoint:', endpoint);
-  console.log('API Key exists:', !!apiKey);
-  console.log('API Key length:', apiKey ? apiKey.length : 0);
-  console.log('Environment:', process.env.NODE_ENV);
-  console.log('Request method:', req.method);
-  console.log('Query params:', req.query);
-
   if (!apiKey) {
     console.error('API key is missing');
     return res.status(500).json({ 
@@ -51,17 +43,8 @@ export default async function handler(req, res) {
       });
     }
 
-    // Debug the final URL (without exposing the API key)
-    console.log('Request URL:', giphyUrl.toString().replace(apiKey, 'REDACTED'));
-    console.log('Request headers:', JSON.stringify(req.headers));
-
     const response = await fetch(giphyUrl.toString(), options);
     const data = await response.json();
-
-    // Debug the response
-    console.log('Response status:', response.status);
-    console.log('Response headers:', JSON.stringify(Object.fromEntries(response.headers)));
-    console.log('Response data:', JSON.stringify(data).slice(0, 200) + '...');
 
     if (!response.ok) {
       console.error('Giphy API error:', data);

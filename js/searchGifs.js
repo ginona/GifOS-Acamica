@@ -30,23 +30,22 @@ inputText.addEventListener('keyup', function(e){
         const q = inputText.value;
         showingViewResults(q);
     }
-    console.log(e.key)
- })
+})
 
- inputTextHeader.addEventListener('keyup', function(e){ 
+inputTextHeader.addEventListener('keyup', function(e){ 
     if(e.key === 'Enter'){
         const q = inputTextHeader.value;
         showingViewResults(q);
     }
- })
+})
 
- inputLens.addEventListener('click', function(){
+inputLens.addEventListener('click', function(){
     showingViewResults(inputText.value)
- })
+})
 
- inputLensHeader.addEventListener('click', function(){
+inputLensHeader.addEventListener('click', function(){
     showingViewResults(inputTextHeader.value)
- })
+})
 
 export async function searchGifsFn(text, pag){
     const divResult = document.getElementById('gifs-container');
@@ -92,48 +91,20 @@ async function getTextTrending() {
     }
 }
 
-export async function setTrendingText(){
+async function setTrendingText(){
+    let trends = await getTextTrending();
+    let trendLocation = document.getElementById('random-trend');
+    trendLocation.innerHTML = '';
+    for(let i = 0; i < 5; i++){
+        trendLocation.innerHTML += `<div class="trend-text-search">${trends.data[i]}</div>`;
+    }
     try {
-        let trends = await getTextTrending();
-        let trendLocation = document.getElementById("random-trend");
-        if (!trendLocation) return;
-        
-        trendLocation.innerHTML = '';
-        
-        if (trends && trends.data && trends.data.length > 0) {
-            for(let i = 0; i < Math.min(5, trends.data.length); i++){
-                trendLocation.innerHTML += `<div class="trend-text-searched noSpace">${trends.data[i]},</div>`;
-            }
-            
-            let trText = document.querySelectorAll('.trend-text-searched');
-            trText.forEach(div => {
-                div.addEventListener('click', e => {
-                    let str = e.currentTarget.textContent.substring(0, e.currentTarget.textContent.length - 1);
-                    let giftSection = document.getElementById('trend-text');
-                    if (!giftSection) return;
-
-                    giftSection.innerHTML = `
-                        <h1 class="main-title">${str}</h1>
-                        <div id="gifs-container" class="gifs-container gifs-container-search-results">           
-                        </div><br>
-                        <div id="more-results" class="button-suggestion">
-                            Ver más
-                        </div> 
-                    `;
-
-                    // Esperar a que el DOM se actualice
-                    setTimeout(() => {
-                        searchGifsFn(str, 0);
-                        let moreResults = document.getElementById('more-results');
-                        if (moreResults) {
-                            moreResults.addEventListener("click", function(){
-                                searchMoreResults(str);
-                            });
-                        }
-                    }, 0);
-                });
+        const trendTexts = document.querySelectorAll('.trend-text-search');
+        trendTexts.forEach(text => {
+            text.addEventListener('click', function(){
+                showingViewResults(this.textContent);
             });
-        }
+        });
     } catch (error) {
         console.error('Error setting trending text:', error);
     }

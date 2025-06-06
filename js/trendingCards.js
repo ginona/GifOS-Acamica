@@ -289,7 +289,7 @@ export async function searchByIdFav(id) {
         const response = await fetch(`/api/giphy?endpoint=gifs/${id}`);
         const data = await response.json();
         if (data.data) {
-            const modal = document.getElementById('modalFav');
+            const modal = document.getElementById('modal');
             let resultHTML = '';
             const url = data.data.images.fixed_width.url;
 
@@ -305,7 +305,7 @@ export async function searchByIdFav(id) {
                             <h3 class="text-card-title">${data.data.title}</h3>
                         </div>
                         <div class="iconos">
-                            <div id="${data.data.id}-add-max-gif" class="icons icon-heart--active"></div>
+                            <div id="${data.data.id}-add-max-gif" class="icons icon-heart"></div>
                             <div id="${data.data.id}-download-max-gif" class="icons icon-download"></div>
                         </div>
                     </div>
@@ -314,7 +314,13 @@ export async function searchByIdFav(id) {
 
             modal.innerHTML = resultHTML;
             modal.style.display = 'block';
-            eventsMaxGifFav(data);
+
+            // Add event listeners
+            const favButton = document.getElementById(`${data.data.id}-add-max-gif`);
+            const downloadButton = document.getElementById(`${data.data.id}-download-max-gif`);
+
+            favButton.addEventListener('click', () => addFavMax(data.data));
+            downloadButton.addEventListener('click', () => downloadFavMax(data.data));
         }
     } catch (error) {
         console.error('Error fetching GIF by ID:', error);
